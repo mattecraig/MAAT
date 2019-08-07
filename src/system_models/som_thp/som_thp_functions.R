@@ -19,6 +19,11 @@ f_12_rmm_tm_corpse <- function(.) {
   .super$state_pars$vmax1 * pwhc^3 * (1-pwhc)^2.5 * .super$state$c1 * (c2c1/(c2c1 + .super$pars$km1))
 }
 
+#First-order decay of unprotected pool
+f_12_k_none_ <- function(.) {
+  .super$state$c1 * .super$pars$k1
+}
+
 #transfer from unprotected to maom pool based on corpse (modified by clay content)
 f_13_k_clay_corpse <- function(.) {
   .super$state$c1 * .super$state_pars$q *.super$pars$t1

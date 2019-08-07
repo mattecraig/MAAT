@@ -2,7 +2,7 @@
   <fnames>
     <som_thp>
       <sys>'f_sys_thp'</sys>
-      <c1_c2>'f_12_rmm_tm_corpse'</c1_c2>
+      <c1_c2>'f_12_k_none_'</c1_c2>
       <c1_c3>'f_13_k_clay_corpse'</c1_c3>
       <c3_c1>'f_31_k__corpse'</c3_c1>
       <c3_c2>'f_32_none__corpse'</c3_c2>
@@ -14,21 +14,24 @@
   <pars>
     <som_thp>
       <ea1>47000</ea1>
-      <vmax_maxref_1>5200</vmax_maxref_1>
+      <vmax_maxref_1>1.37</vmax_maxref_1>
       <R>8.31</R>
       <whc>0.54</whc>
       <km1>0.01</km1>
-      <t1>0.5</t1>
-      <t3>0.0222222222222222</t3>
-      <t2>1</t2>
+      <t1>0.00137</t1>
+      <t3>6.09e-05</t3>
+      <t2>0.0303</t2>
       <fmaom>0</fmaom>
+      <cuec1>0.5</cuec1>
+      <t2eff>0.6</t2eff>
+      <k1>0.00274</k1>
     </som_thp>
   </pars>
   <env>
     <som_thp>
-      <i>200</i>
+      <i>1</i>
       <clay>20</clay>
-      <temp>298</temp>
+      <temp>290</temp>
       <moisture>0.25</moisture>
     </som_thp>
   </env>

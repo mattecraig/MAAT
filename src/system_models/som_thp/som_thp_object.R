@@ -51,7 +51,7 @@ som_thp_object$name <- 'som_thp'
 #Defaults set for CORPSE representation
 som_thp_object$fnames <- list(
   sys       = 'f_sys_thp',           # three pool model with a POM, MB, and MAOM pool
-  c1_c2     = 'f_12_rmm_tm_corpse',     # transfer from pom(1) to mb(2)
+  c1_c2     = 'f_12_k_none_',     # transfer from pom(1) to mb(2)
   c1_c3     = 'f_13_k_clay_corpse',         # transfer from pom to maom(3)
   c3_c1     = 'f_31_k__corpse',             # transfer from maom to pom
   c3_c2     = 'f_32_none__corpse',           # transfer from maom to mb
@@ -64,7 +64,7 @@ som_thp_object$fnames <- list(
 # environment
 ####################################
 som_thp_object$env <- list(
-  i = 200,         #input rate ()
+  i = 1,         #input rate ()
   clay = 20,       #clay content (percent)
   temp = 290,      #temp (K)
   moisture = .25   #volumetric soil water content
@@ -78,10 +78,11 @@ som_thp_object$state <- list(
   dc1   = numeric(1),
   dc2    = numeric(1),
   dc3  = numeric(1),
+  
   #Pools
   c1    = 1,
   c2     = 1,
-  c3   = 1 
+  c3   = 1
 )
 
 
@@ -97,15 +98,17 @@ som_thp_object$state_pars <- list(
 ####################################
 som_thp_object$pars   <- list(
   ea1             = 47000,   #J/mol (average of three pools in CORPSE)
-  vmax_maxref_1   = 500,    #year^-1 (values for mbc in CORPSE)
+  vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
   R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
   whc             = 0.54,     #m^3 m^-3 (soil water holding capacity from CORPSE)
   km1             = 0.01,     #dimensionless (from CORPSE)
-  t1              = 0.5,       #year^-1 (average of two plant pools in CORPSE)
-  t3              = .02222222,      #year^-1 turnover rate of MAOM from CORPSE
-  t2              = 1,       #year^-1 transfer of MB to MAOM from CORPSE
-  fmaom           = 0.0        #fracton of inputs to MAOM pool
-  
+  t1              = 0.00137,       #d^-1 (average of two plant pools in CORPSE; .5/365)
+  t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
+  t2              = .03030,       #d^-1 turnover of MB (1/33 days)
+  fmaom           = 0.0,        #fracton of inputs to MAOM pool
+  cuec1           = .5,        #CUE of microbes growing on POM pool (arbitrary value for now)
+  t2eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
+  k1              = .00274        #first-order decay of POM pool (1/365 days)
 )
 
 
@@ -155,33 +158,71 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
   .$run()
 }
 
+#run with defaults over timestep
+som_thp_object$.test_timestep <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+                                            verbose=F, cverbose=F, diag=F) {
+  
+  if(verbose) str(.)
+  .$build(switches=c(diag,verbose,cverbose) )
+  
+  
+  # configure met data and run
+  .$dataf     <- list()
+  .$dataf$met <-  expand.grid(mget(c('som_thp.timestep', 'som_thp.dummy')))   
+  .$dataf$out <- data.frame(do.call(rbind,lapply(1:length(.$dataf$met[,1]),.$run_met)))
+  
+  print(cbind(.$dataf$met,.$dataf$out))
+  par(mfrow = c(2,2))
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
+  
+}
 
-som_thp_object$.test_change_func <- function(., verbose=F,
-                                              som_thp.text='f_text_combine',
-                                              som_thp.calcval='f_calcval_product',
-                                              som_thp.print_out='f_print_out_textonly' ) {
+
+
+som_thp_object$.test_change_func <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+                                             verbose=F,
+                                             som_thp.c1_c2='f_12_rmm_tm_corpse') {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
-  .$fnames$text      <- som_thp.text
-  .$fnames$calcval   <- som_thp.calcval
-  .$fnames$print_out <- som_thp.print_out
-
-  # configure_test must be called if any variables in the fnames lista re reassigned
+  .$fnames$c1_c2      <- som_thp.c1_c2
+  
   .$configure_test()  
-  .$run()
+
+  .$dataf     <- list()
+  .$dataf$met <-  expand.grid(mget(c('som_thp.timestep', 'som_thp.dummy')))   
+  .$dataf$out <- data.frame(do.call(rbind,lapply(1:length(.$dataf$met[,1]),.$run_met)))
+  
+  print(cbind(.$dataf$met,.$dataf$out))
+  par(mfrow = c(2,2))
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
+
 }
 
 
-som_thp_object$.test_change_pars <- function(., verbose=F,
-                                              som_thp.text1='hello',
-                                              som_thp.text2='world' ) {
+som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+                                             verbose=F,
+                                              som_thp.k1 = .0205) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
 
-  .$pars$text1 <- som_thp.text1
-  .$run()
+  .$pars$k1 <- som_thp.k1
+  
+  .$dataf     <- list()
+  .$dataf$met <-  expand.grid(mget(c('som_thp.timestep', 'som_thp.dummy')))   
+  .$dataf$out <- data.frame(do.call(rbind,lapply(1:length(.$dataf$met[,1]),.$run_met)))
+  
+  print(cbind(.$dataf$met,.$dataf$out))
+  par(mfrow = c(2,2))
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
 }
+
 
 
 
