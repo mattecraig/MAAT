@@ -1,0 +1,10 @@
+<met_data_translator>
+  <env>
+    <som_thp>
+      <i>'column name of variable in metdata file'</i>
+      <clay>'column name of variable in metdata file'</clay>
+      <temp>'column name of variable in metdata file'</temp>
+      <moisture>'column name of variable in metdata file'</moisture>
+    </som_thp>
+  </env>
+</met_data_translator>
