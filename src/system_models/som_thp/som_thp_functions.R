@@ -54,7 +54,36 @@ f_vmax1_arrhenius <- function(.) {
 }
 
 f_q_corpse <- function(.) {
-  0.59 * log(.super$env$clay) + 2.32
+  0.59 * log10(.super$env$clay) + 2.32
 }
 
 ### END ###
+
+
+
+### FUNCTIONS to develop 
+########################
+
+#Hassink and Whitmore 1997
+#Hassink1 MAOM saturation function
+#C3max = max amount of MAOM-C storage
+#C3max units = g C kg-1 soil
+#21.1 + 0.0375*(percent Clay *10)
+
+#Hassink and Whitmore 1997
+#Hassink2 transfer from MBC to MAOM (some will also be lost as CO2 in this implicit-decay model)
+#0.550 + 0.000447 * (percent Clay *10)
+
+#Hassink and Whitmore 1997
+#Hassink2 transfer from MBC to MAOM (some will also be lost as CO2 in this implicit-decay model)
+#This coefficient represents the partioning of mbc turnover between non protected and protected SOM
+#0.550 + 0.000447 * (percent Clay *10)
+
+#Hassink and Whitmore 1997
+#Hassink3 transfer from MBC to MAOM (some will also be lost as CO2 in this implicit-decay model)
+#This coefficient represents the efficiency with which MBC turnover forms MAOM vs CO2 (i.e. MBC does not form POM as in Hassink2)
+#0.471 - 0.000116 * (percent Clay *10)
+#Note: Weird that this is a negative relationship after parameter estimation in this paper; They say it should be positive in the 
+#model descriptions.
+
+

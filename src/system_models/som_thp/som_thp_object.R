@@ -64,7 +64,7 @@ som_thp_object$fnames <- list(
 # environment
 ####################################
 som_thp_object$env <- list(
-  i = 1,         #input rate ()
+  i = .00384,         #input rate (mgC gsoil^-1; from Wang et al. 2013)
   clay = 20,       #clay content (percent)
   temp = 290,      #temp (K)
   moisture = .25   #volumetric soil water content
@@ -78,11 +78,13 @@ som_thp_object$state <- list(
   dc1   = numeric(1),
   dc2    = numeric(1),
   dc3  = numeric(1),
+  dco2 = numeric(1),
   
   #Pools
-  c1    = 1,
-  c2     = 1,
-  c3   = 1
+  c1    = 57,
+  c2     =6.5,
+  c3   = 11600,
+  co2 = numeric(1)
 )
 
 
@@ -176,6 +178,7 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:365, som_thp.dum
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$co2)
   
 }
 
@@ -206,7 +209,7 @@ som_thp_object$.test_change_func <- function(., som_thp.timestep=1:365, som_thp.
 
 som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
-                                              som_thp.k1 = .0205) {
+                                              som_thp.k1 = .000205) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
 

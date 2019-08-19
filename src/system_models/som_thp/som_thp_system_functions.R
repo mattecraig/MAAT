@@ -21,11 +21,13 @@ f_sys_thp <- function(.) {
 .super$state$dc1 <- .super$env$i * (1-.super$pars$fmaom) + .$c3_c1() - .$c1_c2() - .$c1_c3()
 .super$state$dc2 <- .$c1_c2() * .super$pars$cuec1 + .$c3_c2() - .$c2_c3()
 .super$state$dc3 <- .super$env$i * .super$pars$fmaom + .$c1_c3() + .$c2_c3() * .super$pars$t2eff - .$c3_c1() - .$c3_c2()
+.super$state$dco2 <- .$c1_c2() * (1-.super$pars$cuec1) + .$c2_c3() * (1-.super$pars$t2eff)
 
 #update states
 .super$state$c1 <- .super$state$c1 + .super$state$dc1
 .super$state$c2 <- .super$state$c2 + .super$state$dc2
 .super$state$c3 <- .super$state$c3 + .super$state$dc3
+.super$state$co2 <- .super$state$co2 + .super$state$dco2
 }
 
 
