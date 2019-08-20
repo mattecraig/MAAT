@@ -18,7 +18,7 @@
       <R>8.31</R>
       <whc>0.54</whc>
       <km1>0.01</km1>
-      <t1>0.00137</t1>
+      <t1>0.000274</t1>
       <t3>6.09e-05</t3>
       <t2>0.0303</t2>
       <fmaom>0</fmaom>
@@ -29,7 +29,7 @@
   </pars>
   <env>
     <som_thp>
-      <i>1</i>
+      <i>0.00384</i>
       <clay>20</clay>
       <temp>290</temp>
       <moisture>0.25</moisture>

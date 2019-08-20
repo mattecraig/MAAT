@@ -81,9 +81,9 @@ som_thp_object$state <- list(
   dco2 = numeric(1),
   
   #Pools
-  c1    = 57,
-  c2     =6.5,
-  c3   = 11600,
+  c1    = 1,
+  c2     =1,
+  c3   = 1,
   co2 = numeric(1)
 )
 
@@ -104,7 +104,7 @@ som_thp_object$pars   <- list(
   R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
   whc             = 0.54,     #m^3 m^-3 (soil water holding capacity from CORPSE)
   km1             = 0.01,     #dimensionless (from CORPSE)
-  t1              = 0.00137,       #d^-1 (average of two plant pools in CORPSE; .5/365)
+  t1              = 0.000274,       #d^-1 (.1 yearly POM -> MAOM; .1/365)
   t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
   t2              = .03030,       #d^-1 turnover of MB (1/33 days)
   fmaom           = 0.0,        #fracton of inputs to MAOM pool
@@ -161,7 +161,7 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
 }
 
 #run with defaults over timestep
-som_thp_object$.test_timestep <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+som_thp_object$.test_timestep <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
                                             verbose=F, cverbose=F, diag=F) {
   
   if(verbose) str(.)
@@ -186,11 +186,14 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:365, som_thp.dum
 
 som_thp_object$.test_change_func <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
-                                             som_thp.c1_c2='f_12_rmm_tm_corpse') {
+                                             som_thp.c1_c2='f_12_rmm_tm_corpse',
+                                             som_thp.c1_c3='f_13_none__mimics'
+                                             ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
   .$fnames$c1_c2      <- som_thp.c1_c2
+  .$fnames$c1_c3      <- som_thp.c1_c3
   
   .$configure_test()  
 
@@ -207,7 +210,7 @@ som_thp_object$.test_change_func <- function(., som_thp.timestep=1:365, som_thp.
 }
 
 
-som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
                                              verbose=F,
                                               som_thp.k1 = .000205) {
   if(verbose) str(.)

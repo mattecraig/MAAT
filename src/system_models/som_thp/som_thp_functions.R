@@ -29,6 +29,11 @@ f_13_k_clay_corpse <- function(.) {
   .super$state$c1 * .super$state_pars$q *.super$pars$t1
 }
 
+#zero transfer from unprotected to maom pool
+f_13_none__mimics <- function(.) {
+  0
+}
+
 #transfer from maom back to unprotected pool based on corpse (turnover independent of microbial activity)
 f_31_k__corpse <- function(.) {
   .super$state$c3 * .super$pars$t3
@@ -54,7 +59,7 @@ f_vmax1_arrhenius <- function(.) {
 }
 
 f_q_corpse <- function(.) {
-  0.59 * log10(.super$env$clay) + 2.32
+  10^(0.59 * log10(.super$env$clay) + 2.32) / 10^(0.59 * log10(20) + 2.32)
 }
 
 ### END ###
