@@ -104,7 +104,8 @@ som_thp_object$state <- list(
 ####################################
 som_thp_object$state_pars <- list(
  vmax1    =  numeric(1), #michaelis-menton vmax for decay of pool 1
- q        =  numeric(1)  #modifies transfer into maom 
+ q        =  numeric(1),  #modifies transfer into maom 
+ maommax  =  numeric(1)  #determines max maom capacity
 )
 
 
@@ -120,9 +121,13 @@ som_thp_object$pars   <- list(
   t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
   t2              = .03030,       #d^-1 turnover of MB (1/33 days)
   fmaom           = 0.0,        #fracton of inputs to MAOM pool
-  cuec1           = .5,        #CUE of microbes growing on POM pool (arbitrary value for now)
+  cuec1           = .35,        #CUE of microbes growing on POM pool (Value from Hassink1 for now)
   t23eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
-  k1              = .00274        #first-order decay of POM pool (1/365 days)
+  k1              = .00274,        #first-order decay of POM pool (1/365 days)
+  k12hassink       = .001161644,     #first-order decay of non-protected pool in hassink 1997
+  k13hassink      = .003041096,      #adsorption rate hassink1
+  k21hassink      = .000526027,      #second order microbial turnover rate hassink1
+  k31hassink      = .000039726       #desorption rate hassink1
 )
 
 

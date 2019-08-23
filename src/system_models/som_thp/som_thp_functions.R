@@ -30,6 +30,11 @@ f_12_k_none_ <- function(.) {
   .super$state$c1 * .super$pars$k1
 }
 
+#3) First-order decay of "non-protected" pool in Hassink1
+f_12_k_none_hassink1 <- function(.) {
+  .super$state$c1 * .super$pars$k12hassink
+}
+
 ##c1_c3#########################
 
 #1) CORPSE, linear function of clay content
@@ -42,10 +47,18 @@ f_13_none__mimics <- function(.) {
   0
 }
 
+#3) saturating adsorption function from Hassink1
+f_13_saturating_clay_hassink1 <- function(.){
+  .super$pars$k13hassink * (1 - .super$state$c3/.super$state_pars$maommax) * .super$state$c1
+}
+
 ##c2_c1#########################
 
-#1) no transfer
-
+#1) Hassink1, second-order linear transfer
+#.066 taken from Whitmore 1996 paper
+f_21_k2__hassink1 <- function(.){
+  .super$state$c2^2 * .066 * .super$pars$k21hassink
+}
 
 ##c2_c3#########################
 
@@ -59,6 +72,11 @@ f_23_k_clay_corpse <- function(.) {
 #CORPSE linear transfer
 f_31_k__corpse <- function(.) {
   .super$state$c3 * .super$pars$t3
+}
+
+#Hassink1, linear transfer (desorption)
+f_31_k__hassink1 <- function(.){
+  .super$state$c3 * .super$pars$k31hassink
 }
 
 ##c3_c2#########################
@@ -79,6 +97,9 @@ f_1cue_none_ <- function(.){
 ##c1_c3eff#####################
 
 ##c2_c1eff#####################
+f_21eff___hassink <- function(.){
+  .super$pars$cuec1
+}
 
 ##c2_c3eff#####################
 f_23eff___corpse <- function(.){
@@ -103,6 +124,9 @@ f_q_corpse <- function(.) {
   10^(0.59 * log10(.super$env$clay) + 2.32) / 10^(0.59 * log10(20) + 2.32)
 }
 
+f_cmax_hassink1 <- function(.){
+  21.1 + 0.0375*(.super$env$clay*10)
+}
 
 #generic function
 f_0 <- function(.){
