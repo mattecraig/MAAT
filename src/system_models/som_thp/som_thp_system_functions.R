@@ -18,10 +18,10 @@ f_sys_thp <- function(.) {
 .super$state_pars$q     <- .$q()
   
 #fluxes
-.super$state$dc1 <- .super$env$i * (1-.super$pars$fmaom) + .$c3_c1() - .$c1_c2() - .$c1_c3()
-.super$state$dc2 <- .$c1_c2() * .super$pars$cuec1 + .$c3_c2() - .$c2_c3()
-.super$state$dc3 <- .super$env$i * .super$pars$fmaom + .$c1_c3() + .$c2_c3() * .super$pars$t2eff - .$c3_c1() - .$c3_c2()
-.super$state$dco2 <- .$c1_c2() * (1-.super$pars$cuec1) + .$c2_c3() * (1-.super$pars$t2eff)
+.super$state$dc1 <- .super$env$i * .$i1eff() + .$c3_c1() * .$c3_c1eff() + .$c2_c1() * .$c2_c1eff() - .$c1_c2() - .$c1_c3() 
+.super$state$dc2 <- .super$env$i * .$i2eff() + .$c1_c2() * .$c1_c2eff() + .$c3_c2() * .$c3_c2eff() - .$c2_c1() - .$c2_c3() 
+.super$state$dc3 <- .super$env$i * .$i3eff() + .$c1_c3() * .$c1_c3eff() + .$c2_c3() * .$c2_c3eff() - .$c3_c1() - .$c3_c2() 
+.super$state$dco2 <- .super$env$i * (1 -.$i1eff() - .$i2eff() -.$i3eff()) + .$c3_c1() * (1 - .$c3_c1eff()) + .$c2_c1() * (1 - .$c2_c1eff()) + .$c1_c2() * (1- .$c1_c2eff()) + .$c3_c2() * (1 - .$c3_c2eff()) + .$c1_c3() * (1 - .$c1_c3eff()) + .$c2_c3() * (1 - .$c2_c3eff())
 
 #update states
 .super$state$c1 <- .super$state$c1 + .super$state$dc1
@@ -29,7 +29,6 @@ f_sys_thp <- function(.) {
 .super$state$c3 <- .super$state$c3 + .super$state$dc3
 .super$state$co2 <- .super$state$co2 + .super$state$dco2
 }
-
 
 
 ### END ###

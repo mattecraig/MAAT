@@ -5,8 +5,18 @@
       <c1_c2>'f_12_k_none_'</c1_c2>
       <c1_c3>'f_13_k_clay_corpse'</c1_c3>
       <c3_c1>'f_31_k__corpse'</c3_c1>
-      <c3_c2>'f_32_none__corpse'</c3_c2>
+      <c3_c2>'f_0'</c3_c2>
       <c2_c3>'f_23_k_clay_corpse'</c2_c3>
+      <c2_c1>'f_0'</c2_c1>
+      <i1eff>'f_1'</i1eff>
+      <i2eff>'f_0'</i2eff>
+      <i3eff>'f_0'</i3eff>
+      <c1_c2eff>'f_1cue_none_'</c1_c2eff>
+      <c1_c3eff>'f_1'</c1_c3eff>
+      <c3_c1eff>'f_1'</c3_c1eff>
+      <c3_c2eff>'f_1'</c3_c2eff>
+      <c2_c3eff>'f_23eff___corpse'</c2_c3eff>
+      <c2_c1eff>'f_1'</c2_c1eff>
       <vmax1>'f_vmax1_arrhenius'</vmax1>
       <q>'f_q_corpse'</q>
     </som_thp>
@@ -18,12 +28,12 @@
       <R>8.31</R>
       <whc>0.54</whc>
       <km1>0.01</km1>
-      <t1>0.000274</t1>
+      <t1>2.74e-05</t1>
       <t3>6.09e-05</t3>
       <t2>0.0303</t2>
       <fmaom>0</fmaom>
       <cuec1>0.5</cuec1>
-      <t2eff>0.6</t2eff>
+      <t23eff>0.6</t23eff>
       <k1>0.00274</k1>
     </som_thp>
   </pars>

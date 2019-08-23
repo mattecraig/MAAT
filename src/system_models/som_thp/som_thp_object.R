@@ -50,12 +50,24 @@ som_thp_object$name <- 'som_thp'
 
 #Defaults set for CORPSE representation
 som_thp_object$fnames <- list(
-  sys       = 'f_sys_thp',           # three pool model with a POM, MB, and MAOM pool
-  c1_c2     = 'f_12_k_none_',     # transfer from pom(1) to mb(2)
+  sys       = 'f_sys_thp',                  # three pool model with a POM, MB, and MAOM pool
+  c1_c2     = 'f_12_k_none_',               # transfer from pom(1) to mb(2)
   c1_c3     = 'f_13_k_clay_corpse',         # transfer from pom to maom(3)
   c3_c1     = 'f_31_k__corpse',             # transfer from maom to pom
-  c3_c2     = 'f_32_none__corpse',           # transfer from maom to mb
+  c3_c2     = 'f_0',                        # transfer from maom to mb
   c2_c3     = 'f_23_k_clay_corpse',         # transfer from mb to maom
+  c2_c1     = 'f_0',                        # transfer from mb to pom
+  
+  i1eff     = 'f_1',                        #fraction of inputs to pom
+  i2eff     = 'f_0',                        #fraction of inputs to mb
+  i3eff     = 'f_0',                        #fraction of inputs to maom
+  c1_c2eff     = 'f_1cue_none_',            #fraction of pom decay that enters mb
+  c1_c3eff     = 'f_1',                     #fraction of pom decay that enters maom
+  c3_c1eff     = 'f_1',                     #fraction of maom decay that enters pom      
+  c3_c2eff     = 'f_1',                     #fraction of maom decay that enters mb     
+  c2_c3eff     = 'f_23eff___corpse',        #fraction of mb decay that enters maom     
+  c2_c1eff     = 'f_1',                     #fraction of mb decay that enters pom    
+  
   vmax1     = 'f_vmax1_arrhenius',           # modifies vmax for decomp of pool1
   q         = 'f_q_corpse'                   #modifies formation rate of maom
 )
@@ -104,12 +116,12 @@ som_thp_object$pars   <- list(
   R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
   whc             = 0.54,     #m^3 m^-3 (soil water holding capacity from CORPSE)
   km1             = 0.01,     #dimensionless (from CORPSE)
-  t1              = 0.000274,       #d^-1 (.1 yearly POM -> MAOM; .1/365)
+  t1              = 0.0000274,       #d^-1 (.01 yearly POM -> MAOM; .1/365)
   t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
   t2              = .03030,       #d^-1 turnover of MB (1/33 days)
   fmaom           = 0.0,        #fracton of inputs to MAOM pool
   cuec1           = .5,        #CUE of microbes growing on POM pool (arbitrary value for now)
-  t2eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
+  t23eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
   k1              = .00274        #first-order decay of POM pool (1/365 days)
 )
 
@@ -161,7 +173,7 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
 }
 
 #run with defaults over timestep
-som_thp_object$.test_timestep <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
+som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
                                             verbose=F, cverbose=F, diag=F) {
   
   if(verbose) str(.)
@@ -186,14 +198,12 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:3650, som_thp.du
 
 som_thp_object$.test_change_func <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
-                                             som_thp.c1_c2='f_12_rmm_tm_corpse',
-                                             som_thp.c1_c3='f_13_none__mimics'
+                                             som_thp.c1_c2='f_12_rmm_tm_corpse'
                                              ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
   .$fnames$c1_c2      <- som_thp.c1_c2
-  .$fnames$c1_c3      <- som_thp.c1_c3
   
   .$configure_test()  
 

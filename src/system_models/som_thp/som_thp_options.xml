@@ -7,6 +7,16 @@
       <c3_c1>'c(  )'</c3_c1>
       <c3_c2>'c(  )'</c3_c2>
       <c2_c3>'c(  )'</c2_c3>
+      <c2_c1>'c(  )'</c2_c1>
+      <i1eff>'c(  )'</i1eff>
+      <i2eff>'c(  )'</i2eff>
+      <i3eff>'c(  )'</i3eff>
+      <c1_c2eff>'c(  )'</c1_c2eff>
+      <c1_c3eff>'c(  )'</c1_c3eff>
+      <c3_c1eff>'c(  )'</c3_c1eff>
+      <c3_c2eff>'c(  )'</c3_c2eff>
+      <c2_c3eff>'c(  )'</c2_c3eff>
+      <c2_c1eff>'c(  )'</c2_c1eff>
       <vmax1>'c( 'f_vmax1_arrhenius' )'</vmax1>
       <q>'c( 'f_q_corpse' )'</q>
     </som_thp>

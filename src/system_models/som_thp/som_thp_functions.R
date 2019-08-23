@@ -10,44 +10,85 @@
 ### FUNCTIONS
 ################################
 
-# Reverse michaelis-Menton 
+#########################
+#DECOMPOSITION FUNCTIONS#
+#########################
+
+##c1_c2#########################
+
+#1) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
 f_12_rmm_tm_corpse <- function(.) {   
   pwhc <- .super$env$moisture / .super$pars$whc  #percent water holding capacity
   c2c1 <- .super$state$c2 / .super$state$c1      #ratio of microbial biomass to unprotected carbon
  
-  #calculate and return decomposition rate
+          #calculate and return decomposition rate
   .super$state_pars$vmax1 * pwhc^3 * (1-pwhc)^2.5 * .super$state$c1 * (c2c1/(c2c1 + .super$pars$km1))
 }
 
-#First-order decay of unprotected pool
+#2) First-order decay of unprotected pool
 f_12_k_none_ <- function(.) {
   .super$state$c1 * .super$pars$k1
 }
 
-#transfer from unprotected to maom pool based on corpse (modified by clay content)
+##c1_c3#########################
+
+#1) CORPSE, linear function of clay content
 f_13_k_clay_corpse <- function(.) {
   .super$state$c1 * .super$state_pars$q *.super$pars$t1
 }
 
-#zero transfer from unprotected to maom pool
+#2) zero transfer from unprotected to maom pool
 f_13_none__mimics <- function(.) {
   0
 }
 
-#transfer from maom back to unprotected pool based on corpse (turnover independent of microbial activity)
+##c2_c1#########################
+
+#1) no transfer
+
+
+##c2_c3#########################
+
+#CORPSE, linear function of clay content
+f_23_k_clay_corpse <- function(.) {
+  .super$state$c2 * .super$state_pars$q *.super$pars$t2
+}
+
+##c3_c1#########################
+
+#CORPSE linear transfer
 f_31_k__corpse <- function(.) {
   .super$state$c3 * .super$pars$t3
 }
 
-#transfer from maom back to microbial biomass
-f_32_none__corpse <- function(.) {
-  0
+##c3_c2#########################
+
+#1) no transfer
+
+##############################
+#TRANSFER EFFICIENCY FUNCIONS#
+##############################
+
+##c1_c2eff#####################
+
+#constant pom cue
+f_1cue_none_ <- function(.){
+  .super$pars$cuec1
 }
 
-#transfer from microbial biomass to maom pool based on corpse (modified by clay content)
-f_23_k_clay_corpse <- function(.) {
-  .super$state$c2 * .super$state_pars$q *.super$pars$t2
+##c1_c3eff#####################
+
+##c2_c1eff#####################
+
+##c2_c3eff#####################
+f_23eff___corpse <- function(.){
+  .super$pars$t23eff
 }
+
+##c3_c1eff#####################
+
+##c3_c2eff#####################
+
 
 
 #State parameters
@@ -60,6 +101,16 @@ f_vmax1_arrhenius <- function(.) {
 
 f_q_corpse <- function(.) {
   10^(0.59 * log10(.super$env$clay) + 2.32) / 10^(0.59 * log10(20) + 2.32)
+}
+
+
+#generic function
+f_0 <- function(.){
+  0
+}
+
+f_1 <- function(.){
+  1
 }
 
 ### END ###
