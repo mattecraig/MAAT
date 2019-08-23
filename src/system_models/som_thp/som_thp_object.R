@@ -81,9 +81,9 @@ som_thp_object$state <- list(
   dco2 = numeric(1),
   
   #Pools
-  c1    = 1,
-  c2     =1,
-  c3   = 1,
+  c1    = 1.4,
+  c2     =0.1,
+  c3   = 6,
   co2 = numeric(1)
 )
 

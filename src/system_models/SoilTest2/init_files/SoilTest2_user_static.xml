@@ -1,0 +1,22 @@
+<static>
+  <fnames>
+    <SoilTest2>
+      <sys>NA</sys>
+      <c1_dec>NA</c1_dec>
+      <c2_dec>NA</c2_dec>
+      <cue>NA</cue>
+    </SoilTest2>
+  </fnames>
+  <pars>
+    <SoilTest2>
+      <k1>NA</k1>
+      <k2>NA</k2>
+      <cue>NA</cue>
+    </SoilTest2>
+  </pars>
+  <env>
+    <SoilTest2>
+      <i>NA</i>
+    </SoilTest2>
+  </env>
+</static>

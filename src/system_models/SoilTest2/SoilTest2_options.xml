@@ -1,0 +1,10 @@
+<options>
+  <fnames>
+    <SoilTest2>
+      <sys>'c( 'f_sys_1' )'</sys>
+      <c1_dec>'c(  )'</c1_dec>
+      <c2_dec>'c(  )'</c2_dec>
+      <cue>'c( 'f_cue_const' )'</cue>
+    </SoilTest2>
+  </fnames>
+</options>

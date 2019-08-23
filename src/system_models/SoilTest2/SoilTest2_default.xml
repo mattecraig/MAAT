@@ -1,0 +1,22 @@
+<default>
+  <fnames>
+    <SoilTest2>
+      <sys>'f_sys_1'</sys>
+      <c1_dec>'f_c1dec_first'</c1_dec>
+      <c2_dec>'f_c2dec_first'</c2_dec>
+      <cue>'f_cue_const'</cue>
+    </SoilTest2>
+  </fnames>
+  <pars>
+    <SoilTest2>
+      <k1>0.5</k1>
+      <k2>0.05</k2>
+      <cue>0.05</cue>
+    </SoilTest2>
+  </pars>
+  <env>
+    <SoilTest2>
+      <i>200</i>
+    </SoilTest2>
+  </env>
+</default>
