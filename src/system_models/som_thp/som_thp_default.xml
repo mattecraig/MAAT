@@ -19,6 +19,7 @@
       <c2_c1eff>'f_1'</c2_c1eff>
       <vmax1>'f_vmax1_arrhenius'</vmax1>
       <q>'f_q_corpse'</q>
+      <maommax>'f_maommax_hassink1'</maommax>
     </som_thp>
   </fnames>
   <pars>
@@ -32,9 +33,13 @@
       <t3>6.09e-05</t3>
       <t2>0.0303</t2>
       <fmaom>0</fmaom>
-      <cuec1>0.5</cuec1>
+      <cuec1>0.35</cuec1>
       <t23eff>0.6</t23eff>
       <k1>0.00274</k1>
+      <k12hassink>0.001161644</k12hassink>
+      <k13hassink>0.003041096</k13hassink>
+      <k21hassink>0.000526027</k21hassink>
+      <k31hassink>3.9726e-05</k31hassink>
     </som_thp>
   </pars>
   <env>

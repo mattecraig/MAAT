@@ -19,6 +19,7 @@
       <c2_c1eff>'c(  )'</c2_c1eff>
       <vmax1>'c( 'f_vmax1_arrhenius' )'</vmax1>
       <q>'c( 'f_q_corpse' )'</q>
+      <maommax>'c( 'f_maommax_hassink1' )'</maommax>
     </som_thp>
   </fnames>
 </options>

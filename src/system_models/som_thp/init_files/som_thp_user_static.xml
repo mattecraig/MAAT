@@ -19,6 +19,7 @@
       <c2_c1eff>NA</c2_c1eff>
       <vmax1>NA</vmax1>
       <q>NA</q>
+      <maommax>NA</maommax>
     </som_thp>
   </fnames>
   <pars>
@@ -35,6 +36,10 @@
       <cuec1>NA</cuec1>
       <t23eff>NA</t23eff>
       <k1>NA</k1>
+      <k12hassink>NA</k12hassink>
+      <k13hassink>NA</k13hassink>
+      <k21hassink>NA</k21hassink>
+      <k31hassink>NA</k31hassink>
     </som_thp>
   </pars>
   <env>

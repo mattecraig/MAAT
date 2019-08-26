@@ -48,8 +48,10 @@ f_13_none__mimics <- function(.) {
 }
 
 #3) saturating adsorption function from Hassink1
+  #### maom max function is not currently working and I'm not sure why, currently have replaced with "28"
+  #.super$state_pars$maommax
 f_13_saturating_clay_hassink1 <- function(.){
-  .super$pars$k13hassink * (1 - .super$state$c3/.super$state_pars$maommax) * .super$state$c1
+  .super$pars$k13hassink * (1 - .super$state$c3/28) * .super$state$c1
 }
 
 ##c2_c1#########################
@@ -124,7 +126,7 @@ f_q_corpse <- function(.) {
   10^(0.59 * log10(.super$env$clay) + 2.32) / 10^(0.59 * log10(20) + 2.32)
 }
 
-f_cmax_hassink1 <- function(.){
+f_maommax_hassink1 <- function(.){
   21.1 + 0.0375*(.super$env$clay*10)
 }
 
