@@ -70,7 +70,7 @@ som_thp_object$fnames <- list(
   
   vmax1     = 'f_vmax1_arrhenius',           # modifies vmax for decomp of pool1
   q         = 'f_q_corpse',                   #modifies formation rate of maom
-  maommax      = 'f_maommax_hassink1'
+  maommax      = 'f_maommax_hassink'
 )
 
 
@@ -78,7 +78,7 @@ som_thp_object$fnames <- list(
 ####################################
 som_thp_object$env <- list(
   i = .00384,         #input rate (mgC gsoil^-1; from Wang et al. 2013)
-  clay = 20,       #clay content (percent)
+  clay = 19,       #clay content (percent)
   temp = 290,      #temp (K)
   moisture = .25   #volumetric soil water content
 )
@@ -94,9 +94,9 @@ som_thp_object$state <- list(
   dco2 = numeric(1),
   
   #Pools
-  c1    = 1.4,
-  c2     =0.1,
-  c3   = 6,
+  c1    = .1,
+  c2     =0.01,
+  c3   = 1,
   co2 = numeric(1)
 )
 
@@ -105,14 +105,16 @@ som_thp_object$state <- list(
 ####################################
 som_thp_object$state_pars <- list(
  vmax1    =  numeric(1), #michaelis-menton vmax for decay of pool 1
- q        =  numeric(1),  #modifies transfer into maom 
- maommax  =  numeric(1)  #determines max maom capacity
+ maommax  =  numeric(1),  #determines max maom capacity
+ q        =  numeric(1)  #modifies transfer into maom 
+
 )
 
 
 # parameters (everything on year time scale currently)
 ####################################
 som_thp_object$pars   <- list(
+  clay_ref         = 20,     #Reference clay for scaling functions. could set to center of dataset
   ea1             = 47000,   #J/mol (average of three pools in CORPSE)
   vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
   R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)

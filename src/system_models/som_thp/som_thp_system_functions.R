@@ -16,6 +16,7 @@ f_sys_thp <- function(.) {
 #calculate state parameters
 .super$state_pars$vmax1 <- .$vmax1() 
 .super$state_pars$q     <- .$q()
+.super$state_pars$maommax <- .$maommax()
   
 #fluxes
 .super$state$dc1 <- .super$env$i * .$i1eff() + .$c3_c1() * .$c3_c1eff() + .$c2_c1() * .$c2_c1eff() - .$c1_c2() - .$c1_c3() 

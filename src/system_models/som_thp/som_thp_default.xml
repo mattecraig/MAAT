@@ -19,11 +19,12 @@
       <c2_c1eff>'f_1'</c2_c1eff>
       <vmax1>'f_vmax1_arrhenius'</vmax1>
       <q>'f_q_corpse'</q>
-      <maommax>'f_maommax_hassink1'</maommax>
+      <maommax>'f_maommax_hassink'</maommax>
     </som_thp>
   </fnames>
   <pars>
     <som_thp>
+      <clay_ref>20</clay_ref>
       <ea1>47000</ea1>
       <vmax_maxref_1>1.37</vmax_maxref_1>
       <R>8.31</R>
@@ -45,7 +46,7 @@
   <env>
     <som_thp>
       <i>0.00384</i>
-      <clay>20</clay>
+      <clay>19</clay>
       <temp>290</temp>
       <moisture>0.25</moisture>
     </som_thp>
