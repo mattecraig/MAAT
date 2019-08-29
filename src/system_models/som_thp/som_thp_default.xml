@@ -2,20 +2,20 @@
   <fnames>
     <som_thp>
       <sys>'f_sys_thp'</sys>
-      <c1_c2>'f_12_k_none_'</c1_c2>
-      <c1_c3>'f_13_k_clay_corpse'</c1_c3>
-      <c3_c1>'f_31_k__corpse'</c3_c1>
+      <c1_c2>'f_0'</c1_c2>
+      <c1_c3>'f_13_k_none_'</c1_c3>
+      <c3_c1>'f_31_k_none_'</c3_c1>
       <c3_c2>'f_0'</c3_c2>
-      <c2_c3>'f_23_k_clay_corpse'</c2_c3>
+      <c2_c3>'f_0'</c2_c3>
       <c2_c1>'f_0'</c2_c1>
       <i1eff>'f_1'</i1eff>
       <i2eff>'f_0'</i2eff>
       <i3eff>'f_0'</i3eff>
-      <c1_c2eff>'f_1cue_none_'</c1_c2eff>
-      <c1_c3eff>'f_1'</c1_c3eff>
-      <c3_c1eff>'f_1'</c3_c1eff>
+      <c1_c2eff>'f_1'</c1_c2eff>
+      <c1_c3eff>'f_13eff_lin_clay_century'</c1_c3eff>
+      <c3_c1eff>'f_0'</c3_c1eff>
       <c3_c2eff>'f_1'</c3_c2eff>
-      <c2_c3eff>'f_23eff___corpse'</c2_c3eff>
+      <c2_c3eff>'f_1'</c2_c3eff>
       <c2_c1eff>'f_1'</c2_c1eff>
       <vmax1>'f_vmax1_arrhenius'</vmax1>
       <q>'f_q_corpse'</q>
@@ -24,7 +24,12 @@
   </fnames>
   <pars>
     <som_thp>
-      <clay_ref>20</clay_ref>
+      <cuec1>0.13</cuec1>
+      <e13int>0.003</e13int>
+      <e13slope>0.032</e13slope>
+      <k13>0.00108</k13>
+      <k31>4.349e-05</k31>
+      <clay_ref>15</clay_ref>
       <ea1>47000</ea1>
       <vmax_maxref_1>1.37</vmax_maxref_1>
       <R>8.31</R>
@@ -34,7 +39,6 @@
       <t3>6.09e-05</t3>
       <t2>0.0303</t2>
       <fmaom>0</fmaom>
-      <cuec1>0.35</cuec1>
       <t23eff>0.6</t23eff>
       <k1>0.00274</k1>
       <k12hassink>0.001161644</k12hassink>
@@ -46,7 +50,7 @@
   <env>
     <som_thp>
       <i>0.00384</i>
-      <clay>19</clay>
+      <clay>20</clay>
       <temp>290</temp>
       <moisture>0.25</moisture>
     </som_thp>

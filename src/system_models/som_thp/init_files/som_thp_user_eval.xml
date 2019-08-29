@@ -8,6 +8,7 @@
       <c1>'column name of variable in evaldata file'</c1>
       <c2>'column name of variable in evaldata file'</c2>
       <c3>'column name of variable in evaldata file'</c3>
+      <totc>'column name of variable in evaldata file'</totc>
       <co2>'column name of variable in evaldata file'</co2>
     </som_thp>
   </state>

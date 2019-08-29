@@ -24,6 +24,11 @@
   </fnames>
   <pars>
     <som_thp>
+      <cuec1>NA</cuec1>
+      <e13int>NA</e13int>
+      <e13slope>NA</e13slope>
+      <k13>NA</k13>
+      <k31>NA</k31>
       <clay_ref>NA</clay_ref>
       <ea1>NA</ea1>
       <vmax_maxref_1>NA</vmax_maxref_1>
@@ -34,7 +39,6 @@
       <t3>NA</t3>
       <t2>NA</t2>
       <fmaom>NA</fmaom>
-      <cuec1>NA</cuec1>
       <t23eff>NA</t23eff>
       <k1>NA</k1>
       <k12hassink>NA</k12hassink>

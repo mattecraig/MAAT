@@ -42,17 +42,16 @@ f_13_k_clay_corpse <- function(.) {
   .super$state$c1 * .super$state_pars$q *.super$pars$t1
 }
 
-#2) zero transfer from unprotected to maom pool
-f_13_none__mimics <- function(.) {
-  0
+#2) saturating adsorption function from Hassink1
+f_13_saturating_clay_hassink1 <- function(.){
+  .super$pars$k13 * (1 - (.super$state$c3/.super$state_pars$maommax)) * .super$state$c1
 }
 
-#3) saturating adsorption function from Hassink1
-  #
- #!#!#!#!#!#!#!#! maom max function is not currently working and I'm not sure why
-f_13_saturating_clay_hassink1 <- function(.){
-  .super$pars$k13hassink * (1 - (.super$state$c3/.super$state_pars$maommax)) * .super$state$c1
+#3) First-order decay of unprotected pool
+f_13_k_none_ <- function(.) {
+  .super$state$c1 * .super$pars$k13
 }
+
 
 ##c2_c1#########################
 
@@ -71,14 +70,14 @@ f_23_k_clay_corpse <- function(.) {
 
 ##c3_c1#########################
 
-#CORPSE linear transfer
+#1) CORPSE linear transfer
 f_31_k__corpse <- function(.) {
   .super$state$c3 * .super$pars$t3
 }
 
-#Hassink1, linear transfer (desorption)
-f_31_k__hassink1 <- function(.){
-  .super$state$c3 * .super$pars$k31hassink
+#2) first-order decay of slow pool
+f_31_k_none_ <- function(.){
+  .super$state$c3 * .super$pars$k31
 }
 
 ##c3_c2#########################
@@ -97,6 +96,30 @@ f_1cue_none_ <- function(.){
 }
 
 ##c1_c3eff#####################
+#1) Hassink3; function of clay
+#The original paper had very high efficiencies that are
+#probably unrealistic for this structure (POM and MAOM pools only)
+#so scaling original function to a reference clay content and using a lower
+#cue (from ICBM paper)
+##changing int and slope to values from CENTURY (hassink equation barely changes transfer as a function of clay)
+f_13eff_lin_clay_century <- function(.){
+  cue <-   .super$pars$cuec1
+  int <-   .super$pars$e13int
+  slope <- .super$pars$e13slope
+  clay <-  .super$env$clay
+  clayref <- .super$pars$clay_ref
+  ((int + slope * (clay*.01)) / (int + slope * (clayref*.01))) * cue
+}
+
+#2) Hassink1; constant value
+f_13eff_const__ <- function(.){
+  .super$pars$cuec1
+}
+
+#3) saturating function of the humification constant Hassink
+f_13eff_saturating_clay_hassink1 <- function(.){
+  .super$pars$cuec1 * (1 - (.super$state$c3/.super$state_pars$maommax))
+}
 
 ##c2_c1eff#####################
 f_21eff___hassink <- function(.){

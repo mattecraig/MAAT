@@ -50,26 +50,26 @@ som_thp_object$name <- 'som_thp'
 
 #Defaults set for CORPSE representation
 som_thp_object$fnames <- list(
-  sys       = 'f_sys_thp',                  # three pool model with a POM, MB, and MAOM pool
-  c1_c2     = 'f_12_k_none_',               # transfer from pom(1) to mb(2)
-  c1_c3     = 'f_13_k_clay_corpse',         # transfer from pom to maom(3)
-  c3_c1     = 'f_31_k__corpse',             # transfer from maom to pom
-  c3_c2     = 'f_0',                        # transfer from maom to mb
-  c2_c3     = 'f_23_k_clay_corpse',         # transfer from mb to maom
-  c2_c1     = 'f_0',                        # transfer from mb to pom
+  sys       = 'f_sys_thp',                     # three pool model with a POM, MB, and MAOM pool
+  c1_c2     = 'f_0',                           # transfer from pom(1) to mb(2)
+  c1_c3     = 'f_13_k_none_',                  # transfer from pom to maom(3)
+  c3_c1     = 'f_31_k_none_',                  # transfer from maom to pom
+  c3_c2     = 'f_0',                           # transfer from maom to mb
+  c2_c3     = 'f_0',                           # transfer from mb to maom
+  c2_c1     = 'f_0',                           # transfer from mb to pom
   
-  i1eff     = 'f_1',                        #fraction of inputs to pom
-  i2eff     = 'f_0',                        #fraction of inputs to mb
-  i3eff     = 'f_0',                        #fraction of inputs to maom
-  c1_c2eff     = 'f_1cue_none_',            #fraction of pom decay that enters mb
-  c1_c3eff     = 'f_1',                     #fraction of pom decay that enters maom
-  c3_c1eff     = 'f_1',                     #fraction of maom decay that enters pom      
-  c3_c2eff     = 'f_1',                     #fraction of maom decay that enters mb     
-  c2_c3eff     = 'f_23eff___corpse',        #fraction of mb decay that enters maom     
-  c2_c1eff     = 'f_1',                     #fraction of mb decay that enters pom    
+  i1eff     = 'f_1',                           #fraction of inputs to pom
+  i2eff     = 'f_0',                           #fraction of inputs to mb
+  i3eff     = 'f_0',                           #fraction of inputs to maom
+  c1_c2eff     = 'f_1',                        #fraction of pom decay that enters mb
+  c1_c3eff     = 'f_13eff_lin_clay_century',  #fraction of pom decay that enters maom
+  c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
+  c3_c2eff     = 'f_1',                        #fraction of maom decay that enters mb     
+  c2_c3eff     = 'f_1',                        #fraction of mb decay that enters maom     
+  c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
   
-  vmax1     = 'f_vmax1_arrhenius',           # modifies vmax for decomp of pool1
-  q         = 'f_q_corpse',                   #modifies formation rate of maom
+  vmax1     = 'f_vmax1_arrhenius',              # modifies vmax for decomp of pool1
+  q         = 'f_q_corpse',                      #modifies formation rate of maom
   maommax      = 'f_maommax_hassink'
 )
 
@@ -78,7 +78,7 @@ som_thp_object$fnames <- list(
 ####################################
 som_thp_object$env <- list(
   i = .00384,         #input rate (mgC gsoil^-1; from Wang et al. 2013)
-  clay = 19,       #clay content (percent)
+  clay = 20,       #clay content (percent)
   temp = 290,      #temp (K)
   moisture = .25   #volumetric soil water content
 )
@@ -94,9 +94,10 @@ som_thp_object$state <- list(
   dco2 = numeric(1),
   
   #Pools
-  c1    = .1,
-  c2     =0.01,
-  c3   = 1,
+  c1    = 3.556,
+  c2     =0.0001,
+  c3   = 13.835,
+  totc = numeric(1),
   co2 = numeric(1)
 )
 
@@ -114,7 +115,20 @@ som_thp_object$state_pars <- list(
 # parameters (everything on year time scale currently)
 ####################################
 som_thp_object$pars   <- list(
-  clay_ref         = 20,     #Reference clay for scaling functions. could set to center of dataset
+  #two-pool params
+  cuec1           = .13,        #CUE of microbes growing on POM pool (humification value from ICBM bare-fallow)
+  e13int          = .003,       #intercept from CENTURY (Parton et al. 1993)
+  e13slope        = .032,       #slope from CENTURY (Parton et al. 1993)
+  k13             = .00108,    #first-order decay of POM pool (value from Balesdent 1996; weigh00ed average of >50um fraction including >2mm /365)
+  k31             = .00004349,    #first-order decay of MAOM pool (value from Balesdent 1996/365 = .00004349) 
+  clay_ref        = 15,         #Reference clay for scaling functions. could set to center of dataset
+  
+  #three-pool params
+  
+  
+  
+  
+  #old params to get rid of...
   ea1             = 47000,   #J/mol (average of three pools in CORPSE)
   vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
   R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
@@ -124,7 +138,6 @@ som_thp_object$pars   <- list(
   t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
   t2              = .03030,       #d^-1 turnover of MB (1/33 days)
   fmaom           = 0.0,        #fracton of inputs to MAOM pool
-  cuec1           = .35,        #CUE of microbes growing on POM pool (Value from Hassink1 for now)
   t23eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
   k1              = .00274,        #first-order decay of POM pool (1/365 days)
   k12hassink       = .001161644,     #first-order decay of non-protected pool in hassink 1997
@@ -181,7 +194,7 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
 }
 
 #run with defaults over timestep
-som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
+som_thp_object$.test_timestep <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
                                             verbose=F, cverbose=F, diag=F) {
   
   if(verbose) str(.)
@@ -206,12 +219,14 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.d
 
 som_thp_object$.test_change_func <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
                                              verbose=F,
-                                             som_thp.c1_c3='f_13_saturating_clay_hassink1'
+                                             som_thp.c1_c3eff='f_13eff_saturating_clay_hassink1',
+                                             som_thp.cuec1 = 0.305
                                              ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
-  .$fnames$c1_c3      <- som_thp.c1_c3
+  .$fnames$c1_c3eff   <- som_thp.c1_c3eff
+  .$pars$cuec1 <- som_thp.cuec1
   
   .$configure_test()  
 
@@ -228,7 +243,7 @@ som_thp_object$.test_change_func <- function(., som_thp.timestep=1:36500, som_th
 }
 
 
-som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
+som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
                                               som_thp.k1 = .000205) {
   if(verbose) str(.)
@@ -245,61 +260,6 @@ som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:3650, som_thp
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
-}
-
-
-
-##Hassink model 1 test
-som_thp_object$.test_hassink1 <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
-                                             verbose=F,
-                                             som_thp.c1_c2     = 'f_12_k_none_hassink1',               # transfer from pom(1) to mb(2)
-                                          som_thp.c1_c3     = 'f_13_saturating_clay_hassink1',         # transfer from pom to maom(3)
-                                          som_thp.c3_c1     = 'f_31_k__hassink1',             # transfer from maom to pom
-                                          som_thp.c3_c2     = 'f_0',                        # transfer from maom to mb
-                                          som_thp.c2_c3     = 'f_0',                        # transfer from mb to maom
-                                          som_thp.c2_c1     = 'f_21_k2__hassink1',          # transfer from mb to pom
-                                             
-                                          som_thp.i1eff     = 'f_1',                        #fraction of inputs to pom
-                                          som_thp.i2eff     = 'f_0',                        #fraction of inputs to mb
-                                          som_thp.i3eff     = 'f_0',                        #fraction of inputs to maom
-                                          som_thp.c1_c2eff     = 'f_1cue_none_',            #fraction of pom decay that enters mb
-                                          som_thp.c1_c3eff     = 'f_1',                     #fraction of pom decay that enters maom
-                                          som_thp.c3_c1eff     = 'f_1',                     #fraction of maom decay that enters pom      
-                                          som_thp.c3_c2eff     = 'f_1',                     #fraction of maom decay that enters mb     
-                                          som_thp.c2_c3eff     = 'f_1',                     #fraction of mb decay that enters maom     
-                                          som_thp.c2_c1eff     = 'f_21eff___hassink'                     #fraction of mb decay that enters pom    
-                                             
-) {
-  if(verbose) str(.)
-  .$build(switches=c(F,verbose,F))
-  
-  .$fnames$c1_c2 <- som_thp.c1_c2
-  .$fnames$c1_c3 <- som_thp.c1_c3   
-  .$fnames$c3_c1 <- som_thp.c3_c1   
-  .$fnames$c3_c2 <- som_thp.c3_c2
-  .$fnames$c2_c3 <- som_thp.c2_c3 
-  .$fnames$c2_c1 <- som_thp.c2_c1
-  
-  .$fnames$c1_c2eff   <- som_thp.c1_c2eff     
-  .$fnames$c1_c3eff <- som_thp.c1_c3eff     
-  .$fnames$c3_c1eff     <- som_thp.c3_c1eff        
-  .$fnames$c3_c2eff  <- som_thp.c3_c2eff     
-  .$fnames$c2_c3eff  <- som_thp.c2_c3eff        
-  .$fnames$c2_c1eff <- som_thp.c2_c1eff    
-
-  
-  .$configure_test()  
-  
-  .$dataf     <- list()
-  .$dataf$met <-  expand.grid(mget(c('som_thp.timestep', 'som_thp.dummy')))   
-  .$dataf$out <- data.frame(do.call(rbind,lapply(1:length(.$dataf$met[,1]),.$run_met)))
-  
-  print(cbind(.$dataf$met,.$dataf$out))
-  par(mfrow = c(2,2))
-  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
-  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
-  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
-  
 }
 
 

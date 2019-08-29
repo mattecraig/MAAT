@@ -28,6 +28,7 @@ f_sys_thp <- function(.) {
 .super$state$c1 <- .super$state$c1 + .super$state$dc1
 .super$state$c2 <- .super$state$c2 + .super$state$dc2
 .super$state$c3 <- .super$state$c3 + .super$state$dc3
+.super$state$totc <- .super$state$c1 + .super$state$c2 + .super$state$c3
 .super$state$co2 <- .super$state$co2 + .super$state$dco2
 }
 
