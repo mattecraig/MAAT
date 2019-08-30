@@ -16,7 +16,12 @@
 
 ##c1_c2#########################
 
-#1) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
+##1) MM decay of POM pool
+f_12_mm_none_li <- function(.) {
+  (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c1)
+}
+  
+#) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
 f_12_rmm_tm_corpse <- function(.) {   
   pwhc <- .super$env$moisture / .super$pars$whc  #percent water holding capacity
   c2c1 <- .super$state$c2 / .super$state$c1      #ratio of microbial biomass to unprotected carbon
@@ -25,12 +30,12 @@ f_12_rmm_tm_corpse <- function(.) {
   .super$state_pars$vmax1 * pwhc^3 * (1-pwhc)^2.5 * .super$state$c1 * (c2c1/(c2c1 + .super$pars$km1))
 }
 
-#2) First-order decay of unprotected pool
+#) First-order decay of unprotected pool
 f_12_k_none_ <- function(.) {
   .super$state$c1 * .super$pars$k1
 }
 
-#3) First-order decay of "non-protected" pool in Hassink1
+#) First-order decay of "non-protected" pool in Hassink1
 f_12_k_none_hassink1 <- function(.) {
   .super$state$c1 * .super$pars$k12hassink
 }
@@ -63,6 +68,11 @@ f_21_k2__hassink1 <- function(.){
 
 ##c2_c3#########################
 
+#1) First-order turnover of the microbial biomass pool
+f_23_k_none_li <- function(.){
+  .super$state$c2*.super$pars$k23
+}
+
 #CORPSE, linear function of clay content
 f_23_k_clay_corpse <- function(.) {
   .super$state$c2 * .super$state_pars$q *.super$pars$t2
@@ -82,7 +92,10 @@ f_31_k_none_ <- function(.){
 
 ##c3_c2#########################
 
-#1) no transfer
+##1) MM decay of MAOM pool
+f_32_mm_none_li <- function(.) {
+  (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c3)
+}
 
 ##############################
 #TRANSFER EFFICIENCY FUNCIONS#
@@ -134,10 +147,29 @@ f_23eff___corpse <- function(.){
 ##c3_c1eff#####################
 
 ##c3_c2eff#####################
-
+#1)constant maom CUE (same as POM cue for now)
+f_3cue_none_ <- function(.){
+  .super$pars$cuec3
+}
 
 
 #State parameters
+f_vmax1_constMM <- function(.){
+  .super$pars$vmax1_ref_MM
+}
+
+f_km1_constMM <- function(.){
+  .super$pars$km1_ref_MM
+}
+
+f_vmax3_constMM <- function(.){
+  .super$pars$vmax3_ref_MM
+}
+
+f_km3_constMM <- function(.){
+  .super$pars$km3_ref_MM
+}
+
 f_maommax_hassink <- function(.) {
   21.1 + 0.0375*(.super$env$clay)*10
 }

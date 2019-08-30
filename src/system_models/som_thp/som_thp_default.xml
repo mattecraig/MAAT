@@ -17,8 +17,10 @@
       <c3_c2eff>'f_1'</c3_c2eff>
       <c2_c3eff>'f_1'</c2_c3eff>
       <c2_c1eff>'f_1'</c2_c1eff>
-      <vmax1>'f_vmax1_arrhenius'</vmax1>
-      <q>'f_q_corpse'</q>
+      <vmax1>'f_vmax1_constMM'</vmax1>
+      <km1>'f_km1_constMM'</km1>
+      <vmax3>'f_vmax3_constMM'</vmax3>
+      <km3>'f_km3_constMM'</km3>
       <maommax>'f_maommax_hassink'</maommax>
     </som_thp>
   </fnames>
@@ -30,6 +32,12 @@
       <k13>0.00108</k13>
       <k31>4.349e-05</k31>
       <clay_ref>15</clay_ref>
+      <vmax1_ref_MM>1.93</vmax1_ref_MM>
+      <km1_ref_MM>50</km1_ref_MM>
+      <vmax3_ref_MM>0.0777</vmax3_ref_MM>
+      <km3_ref_MM>250</km3_ref_MM>
+      <k23>0.00672</k23>
+      <cuec3>0.31</cuec3>
       <ea1>47000</ea1>
       <vmax_maxref_1>1.37</vmax_maxref_1>
       <R>8.31</R>

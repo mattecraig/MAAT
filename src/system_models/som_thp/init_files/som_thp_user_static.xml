@@ -18,7 +18,9 @@
       <c2_c3eff>NA</c2_c3eff>
       <c2_c1eff>NA</c2_c1eff>
       <vmax1>NA</vmax1>
-      <q>NA</q>
+      <km1>NA</km1>
+      <vmax3>NA</vmax3>
+      <km3>NA</km3>
       <maommax>NA</maommax>
     </som_thp>
   </fnames>
@@ -30,6 +32,12 @@
       <k13>NA</k13>
       <k31>NA</k31>
       <clay_ref>NA</clay_ref>
+      <vmax1_ref_MM>NA</vmax1_ref_MM>
+      <km1_ref_MM>NA</km1_ref_MM>
+      <vmax3_ref_MM>NA</vmax3_ref_MM>
+      <km3_ref_MM>NA</km3_ref_MM>
+      <k23>NA</k23>
+      <cuec3>NA</cuec3>
       <ea1>NA</ea1>
       <vmax_maxref_1>NA</vmax_maxref_1>
       <R>NA</R>
