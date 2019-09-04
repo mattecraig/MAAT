@@ -25,6 +25,14 @@ f_c1c2_mm_none_li <- function(.) {
 f_c1c2_rmm_none_ <- function(.){
   (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c2)
 } 
+
+f_c1c2_0 <- function(.) {
+  0
+}
+
+f_c1c2_1 <- function(.) {
+  1
+}
   
 #) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
 #f_12_rmm_tm_corpse <- function(.) {   
@@ -62,6 +70,13 @@ f_c1c3_k_none_ <- function(.) {
   .super$state$c1 * .super$pars$k13
 }
 
+f_c1c3_0 <- function(.) {
+  0
+}
+
+f_c1c3_1 <- function(.) {
+  1
+}
 
 ##c2_c1#########################
 
@@ -71,11 +86,27 @@ f_c1c3_k_none_ <- function(.) {
 #  .super$state$c2^2 * .066 * .super$pars$k21hassink
 #}
 
+f_c2c1_0 <- function(.) {
+  0
+}
+
+f_c2c1_1 <- function(.) {
+  1
+}
+
 ##c2_c3#########################
 
 #1) First-order turnover of the microbial biomass pool
 f_c2c3_k_none_li <- function(.){
   .super$state$c2*.super$pars$k23
+}
+
+f_c2c3_0 <- function(.) {
+  0
+}
+
+f_c2c3_1 <- function(.) {
+  1
 }
 
 #CORPSE, linear function of clay content
@@ -95,6 +126,14 @@ f_c3c1_k_none_ <- function(.){
   .super$state$c3 * .super$pars$k31
 }
 
+f_c3c1_0 <- function(.) {
+  0
+}
+
+f_c3c1_1 <- function(.) {
+  1
+}
+
 ##c3_c2#########################
 
 ##1) MM decay of MAOM pool
@@ -107,6 +146,14 @@ f_c3c2_rmm_none_ <- function(.) {
   (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c2)
 }
 
+f_c3c2_0 <- function(.) {
+  0
+}
+
+f_c3c2_1 <- function(.) {
+  1
+}
+
 ##############################
 #TRANSFER EFFICIENCY FUNCIONS#
 ##############################
@@ -116,6 +163,14 @@ f_c3c2_rmm_none_ <- function(.) {
 #constant pom cue
 f_c1c2eff_none_ <- function(.){
   .super$pars$cuec1
+}
+
+f_c1c2eff_0 <- function(.){
+  0
+}
+
+f_c1c2eff_1 <- function(.){
+  1
 }
 
 ##c1_c3eff#####################
@@ -144,10 +199,27 @@ f_c1c3eff_saturating_clay_hassink1 <- function(.){
   .super$pars$cuec1 * (1 - (.super$state$c3/.super$state_pars$maommax))
 }
 
+f_c1c3eff_0 <- function(.){
+  0
+}
+
+f_c1c3eff_1 <- function(.){
+  1
+}
+
+
 ##c2_c1eff#####################
 #f_c2c1eff___hassink <- function(.){
 #  .super$pars$cuec1
 #}
+
+f_c2c1eff_0 <- function(.){
+  0
+}
+
+f_c2c1eff_1 <- function(.){
+  1
+}
 
 ##c2_c3eff#####################
 #1) Hassink3; function of clay
@@ -164,6 +236,14 @@ f_c2c3eff_lin_clay_century <- function(.){
   clayref <- .super$pars$clay_ref
   ((int + slope * (clay*.01)) / (int + slope * (clayref*.01))) * cue
 }
+
+f_c2c3eff_0 <- function(.){
+  0
+}
+
+f_c2c3eff_1 <- function(.){
+  1
+}
   
 
 #f_c2c3eff___corpse <- function(.){
@@ -172,10 +252,26 @@ f_c2c3eff_lin_clay_century <- function(.){
 
 ##c3_c1eff#####################
 
+f_c3c1eff_0 <- function(.){
+  0
+}
+
+f_c3c1eff_1 <- function(.){
+  1
+}
+
 ##c3_c2eff#####################
 #1)constant maom CUE (same as POM cue for now)
 f_c3c2eff_none_ <- function(.){
   .super$pars$cuec3
+}
+
+f_c3c2eff_0 <- function(.){
+  0
+}
+
+f_c3c2eff_1 <- function(.){
+  1
 }
 
 
