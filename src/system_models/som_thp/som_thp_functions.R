@@ -27,30 +27,30 @@ f_c1c2_rmm_none_ <- function(.){
 } 
   
 #) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
-f_12_rmm_tm_corpse <- function(.) {   
-  pwhc <- .super$env$moisture / .super$pars$whc  #percent water holding capacity
-  c2c1 <- .super$state$c2 / .super$state$c1      #ratio of microbial biomass to unprotected carbon
+#f_12_rmm_tm_corpse <- function(.) {   
+# # pwhc <- .super$env$moisture / .super$pars$whc  #percent water holding capacity
+#  #c2c1 <- .super$state$c2 / .super$state$c1      #ratio of microbial biomass to unprotected carbon
  
           #calculate and return decomposition rate
-  .super$state_pars$vmax1 * pwhc^3 * (1-pwhc)^2.5 * .super$state$c1 * (c2c1/(c2c1 + .super$pars$km1))
-}
+#  .super$state_pars$vmax1 * pwhc^3 * (1-pwhc)^2.5 * .super$state$c1 * (c2c1/(c2c1 + .super$pars$km1))
+#}
 
 #) First-order decay of unprotected pool
-f_12_k_none_ <- function(.) {
-  .super$state$c1 * .super$pars$k1
-}
+#f_12_k_none_ <- function(.) {
+#  .super$state$c1 * .super$pars$k1
+#}
 
 #) First-order decay of "non-protected" pool in Hassink1
-f_12_k_none_hassink1 <- function(.) {
-  .super$state$c1 * .super$pars$k12hassink
-}
+#f_12_k_none_hassink1 <- function(.) {
+#  .super$state$c1 * .super$pars$k12hassink
+#}
 
 ##c1_c3#########################
 
 #1) CORPSE, linear function of clay content
-f_c1c3_k_clay_corpse <- function(.) {
-  .super$state$c1 * .super$state_pars$q *.super$pars$t1
-}
+#f_c1c3_k_clay_corpse <- function(.) {
+#  .super$state$c1 * .super$state_pars$q *.super$pars$t1
+#}
 
 #2) saturating adsorption function from Hassink1
 f_c1c3_saturating_clay_hassink1 <- function(.){
@@ -67,9 +67,9 @@ f_c1c3_k_none_ <- function(.) {
 
 #1) Hassink1, second-order linear transfer
 #.066 taken from Whitmore 1996 paper
-f_c2c1_k2__hassink1 <- function(.){
-  .super$state$c2^2 * .066 * .super$pars$k21hassink
-}
+#f_c2c1_k2__hassink1 <- function(.){
+#  .super$state$c2^2 * .066 * .super$pars$k21hassink
+#}
 
 ##c2_c3#########################
 
@@ -79,16 +79,16 @@ f_c2c3_k_none_li <- function(.){
 }
 
 #CORPSE, linear function of clay content
-f_c2c3_k_clay_corpse <- function(.) {
-  .super$state$c2 * .super$state_pars$q *.super$pars$t2
-}
+#f_c2c3_k_clay_corpse <- function(.) {
+#  .super$state$c2 * .super$state_pars$q *.super$pars$t2
+#}
 
 ##c3_c1#########################
 
 #1) CORPSE linear transfer
-f_c3c1_k__corpse <- function(.) {
-  .super$state$c3 * .super$pars$t3
-}
+#f_c3c1_k__corpse <- function(.) {
+#  .super$state$c3 * .super$pars$t3
+#}
 
 #2) first-order decay of slow pool
 f_c3c1_k_none_ <- function(.){
@@ -145,9 +145,9 @@ f_c1c3eff_saturating_clay_hassink1 <- function(.){
 }
 
 ##c2_c1eff#####################
-f_c2c1eff___hassink <- function(.){
-  .super$pars$cuec1
-}
+#f_c2c1eff___hassink <- function(.){
+#  .super$pars$cuec1
+#}
 
 ##c2_c3eff#####################
 #1) Hassink3; function of clay
@@ -166,9 +166,9 @@ f_c2c3eff_lin_clay_century <- function(.){
 }
   
 
-f_c2c3eff___corpse <- function(.){
-  .super$pars$t23eff
-}
+#f_c2c3eff___corpse <- function(.){
+#  .super$pars$t23eff
+#}
 
 ##c3_c1eff#####################
 

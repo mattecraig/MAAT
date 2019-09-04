@@ -43,21 +43,6 @@
       <km1_ref_rmm>1.708</km1_ref_rmm>
       <vmax3_ref_rmm>0.0777</vmax3_ref_rmm>
       <km3_ref_rmm>250</km3_ref_rmm>
-      <ea1>47000</ea1>
-      <vmax_maxref_1>1.37</vmax_maxref_1>
-      <R>8.31</R>
-      <whc>0.54</whc>
-      <km1>0.01</km1>
-      <t1>2.74e-05</t1>
-      <t3>6.09e-05</t3>
-      <t2>0.0303</t2>
-      <fmaom>0</fmaom>
-      <t23eff>0.6</t23eff>
-      <k1>0.00274</k1>
-      <k12hassink>0.001161644</k12hassink>
-      <k13hassink>0.003041096</k13hassink>
-      <k21hassink>0.000526027</k21hassink>
-      <k31hassink>3.9726e-05</k31hassink>
     </som_thp>
   </pars>
   <env>

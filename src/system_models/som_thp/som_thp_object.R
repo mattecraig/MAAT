@@ -141,26 +141,26 @@ som_thp_object$pars   <- list(
   vmax1_ref_rmm       = .004582,     #see "parameterization_notes.doc" 
   km1_ref_rmm        = 1.708,       #see "parameterization_notes.doc" 
   vmax3_ref_rmm      = .0777,    #see "parameterization_notes.doc" 
-  km3_ref_rmm         = 250,      #see "parameterization_notes.doc" 
+  km3_ref_rmm         = 250      #see "parameterization_notes.doc" 
   
   
   
   #old params to get rid of...
-  ea1             = 47000,   #J/mol (average of three pools in CORPSE)
-  vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
-  R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
-  whc             = 0.54,     #m^3 m^-3 (soil water holding capacity from CORPSE)
-  km1             = 0.01,     #dimensionless (from CORPSE)
-  t1              = 0.0000274,       #d^-1 (.01 yearly POM -> MAOM; .1/365)
-  t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
-  t2              = .03030,       #d^-1 turnover of MB (1/33 days)
-  fmaom           = 0.0,        #fracton of inputs to MAOM pool
-  t23eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
-  k1              = .00274,        #first-order decay of POM pool (1/365 days)
-  k12hassink       = .001161644,     #first-order decay of non-protected pool in hassink 1997
-  k13hassink      = .003041096,      #adsorption rate hassink1
-  k21hassink      = .000526027,      #second order microbial turnover rate hassink1
-  k31hassink      = .000039726       #desorption rate hassink1
+  #ea1             = 47000,   #J/mol (average of three pools in CORPSE)
+  #vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
+  #R               = 8.31,    #J K^-1 mol^-1 (ideal gas constant)
+  #whc             = 0.54,     #m^3 m^-3 (soil water holding capacity from CORPSE)
+  #km1             = 0.01,     #dimensionless (from CORPSE)
+  #t1              = 0.0000274,       #d^-1 (.01 yearly POM -> MAOM; .1/365)
+  #t3              = .0000609,      #d^-1 turnover rate of MAOM from CORPSE; (1/45*1/365)
+  #t2              = .03030,       #d^-1 turnover of MB (1/33 days)
+  #fmaom           = 0.0,        #fracton of inputs to MAOM pool
+  #t23eff           = .6,        #efficiency with which microbial turnover converted to maom vs respired (value from CORPSE)
+  #k1              = .00274,        #first-order decay of POM pool (1/365 days)
+  #k12hassink       = .001161644,     #first-order decay of non-protected pool in hassink 1997
+  #k13hassink      = .003041096,      #adsorption rate hassink1
+  #k21hassink      = .000526027,      #second order microbial turnover rate hassink1
+  #k31hassink      = .000039726       #desorption rate hassink1
 )
 
 

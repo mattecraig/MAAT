@@ -43,21 +43,6 @@
       <km1_ref_rmm>NA</km1_ref_rmm>
       <vmax3_ref_rmm>NA</vmax3_ref_rmm>
       <km3_ref_rmm>NA</km3_ref_rmm>
-      <ea1>NA</ea1>
-      <vmax_maxref_1>NA</vmax_maxref_1>
-      <R>NA</R>
-      <whc>NA</whc>
-      <km1>NA</km1>
-      <t1>NA</t1>
-      <t3>NA</t3>
-      <t2>NA</t2>
-      <fmaom>NA</fmaom>
-      <t23eff>NA</t23eff>
-      <k1>NA</k1>
-      <k12hassink>NA</k12hassink>
-      <k13hassink>NA</k13hassink>
-      <k21hassink>NA</k21hassink>
-      <k31hassink>NA</k31hassink>
     </som_thp>
   </pars>
   <env>
