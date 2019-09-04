@@ -140,6 +140,22 @@ f_21eff___hassink <- function(.){
 }
 
 ##c2_c3eff#####################
+#1) Hassink3; function of clay
+#The original paper had very high efficiencies that are
+#probably unrealistic for this structure (POM and MAOM pools only)
+#so scaling original function to a reference clay content and using a lower
+#cue (from ICBM paper)
+##changing int and slope to values from CENTURY (hassink equation barely changes transfer as a function of clay)
+f_23eff_lin_clay_century <- function(.){
+  cue <-   .super$pars$cuec2
+  int <-   .super$pars$e13int     #using same value from 13eff
+  slope <- .super$pars$e13slope   #using same value from 13eff
+  clay <-  .super$env$clay
+  clayref <- .super$pars$clay_ref
+  ((int + slope * (clay*.01)) / (int + slope * (clayref*.01))) * cue
+}
+  
+
 f_23eff___corpse <- function(.){
   .super$pars$t23eff
 }

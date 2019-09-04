@@ -27,6 +27,7 @@
   <pars>
     <som_thp>
       <cuec1>0.13</cuec1>
+      <cuec2>0.47</cuec2>
       <e13int>0.003</e13int>
       <e13slope>0.032</e13slope>
       <k13>0.00108</k13>

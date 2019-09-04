@@ -134,7 +134,8 @@ som_thp_object$pars   <- list(
   vmax3_ref_MM       = .0777,    #see "parameterization_notes.doc" 
   km3_ref_MM         = 250,      #see "parameterization_notes.doc" 
   k23                = .00672,    #turnover rate of microbial biomass from Li paper... might be too slow
-  cuec3              = .31,        #general CUE from Li et al. 
+  cuec3              = .31,       #general CUE from Li et al. 
+  cuec2              = .6,        #Proportion of microbial turnover products that are retained rather than respired (Value of carbon eff of mic turnover from CORPSE)
   
   #old params to get rid of...
   ea1             = 47000,   #J/mol (average of three pools in CORPSE)
@@ -283,13 +284,16 @@ som_thp_object$.test_thp <- function(., som_thp.timestep=1:365, som_thp.dummy = 
                                      som_thp.c1_c3eff     = 'f_1',  #fraction of pom decay that enters maom
                                      som_thp.c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
                                      som_thp.c3_c2eff     = 'f_3cue_none_',                        #fraction of maom decay that enters mb     
-                                     som_thp.c2_c3eff     = 'f_13eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
+                                     som_thp.c2_c3eff     = 'f_23eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
                                      som_thp.c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                      som_thp.cuec1          = 0.31,
                                      som_thp.vmax1_ref_MM       = 1.93,     #see "parameterization_notes.doc" 
                                      som_thp.km1_ref_MM         = 50,       #see "parameterization_notes.doc" 
                                      som_thp.vmax3_ref_MM       = .0777,    #see "parameterization_notes.doc" 
-                                     som_thp.km3_ref_MM         = 250   
+                                     som_thp.km3_ref_MM         = 250,
+                                     som_thp.c2                 = 0.326,
+                                     som_thp.cuec2              = 0.6,
+                                     som_thp.cuec3              = 0.31
 ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
@@ -312,6 +316,10 @@ som_thp_object$.test_thp <- function(., som_thp.timestep=1:365, som_thp.dummy = 
   .$pars$km1_ref_MM <- som_thp.km1_ref_MM
   .$pars$vmax3_ref_MM  <- som_thp.vmax3_ref_MM 
   .$pars$km3_ref_MM <- som_thp.km3_ref_MM
+  .$pars$cuec2 <- som_thp.cuec2
+  .$pars$cuec3 <- som_thp.cuec3
+  
+  .$state$c2 <- som_thp.c2
   
   
   
