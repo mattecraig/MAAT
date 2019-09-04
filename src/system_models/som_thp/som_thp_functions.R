@@ -14,15 +14,15 @@
 #DECOMPOSITION FUNCTIONS#
 #########################
 
-##c1_c2#########################
+##c1c2#########################
 
 ##1) MM decay of POM pool
-f_12_mm_none_li <- function(.) {
+f_c1c2_mm_none_li <- function(.) {
   (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c1)
 }
 
 ##2) RMM decay of POM pool
-f_12_rmm_none_ <- function(.){
+f_c1c2_rmm_none_ <- function(.){
   (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c2)
 } 
   
@@ -48,17 +48,17 @@ f_12_k_none_hassink1 <- function(.) {
 ##c1_c3#########################
 
 #1) CORPSE, linear function of clay content
-f_13_k_clay_corpse <- function(.) {
+f_c1c3_k_clay_corpse <- function(.) {
   .super$state$c1 * .super$state_pars$q *.super$pars$t1
 }
 
 #2) saturating adsorption function from Hassink1
-f_13_saturating_clay_hassink1 <- function(.){
+f_c1c3_saturating_clay_hassink1 <- function(.){
   .super$pars$k13 * (1 - (.super$state$c3/.super$state_pars$maommax)) * .super$state$c1
 }
 
 #3) First-order decay of unprotected pool
-f_13_k_none_ <- function(.) {
+f_c1c3_k_none_ <- function(.) {
   .super$state$c1 * .super$pars$k13
 }
 
@@ -67,43 +67,43 @@ f_13_k_none_ <- function(.) {
 
 #1) Hassink1, second-order linear transfer
 #.066 taken from Whitmore 1996 paper
-f_21_k2__hassink1 <- function(.){
+f_c2c1_k2__hassink1 <- function(.){
   .super$state$c2^2 * .066 * .super$pars$k21hassink
 }
 
 ##c2_c3#########################
 
 #1) First-order turnover of the microbial biomass pool
-f_23_k_none_li <- function(.){
+f_c2c3_k_none_li <- function(.){
   .super$state$c2*.super$pars$k23
 }
 
 #CORPSE, linear function of clay content
-f_23_k_clay_corpse <- function(.) {
+f_c2c3_k_clay_corpse <- function(.) {
   .super$state$c2 * .super$state_pars$q *.super$pars$t2
 }
 
 ##c3_c1#########################
 
 #1) CORPSE linear transfer
-f_31_k__corpse <- function(.) {
+f_c3c1_k__corpse <- function(.) {
   .super$state$c3 * .super$pars$t3
 }
 
 #2) first-order decay of slow pool
-f_31_k_none_ <- function(.){
+f_c3c1_k_none_ <- function(.){
   .super$state$c3 * .super$pars$k31
 }
 
 ##c3_c2#########################
 
 ##1) MM decay of MAOM pool
-f_32_mm_none_li <- function(.) {
+f_c3c2_mm_none_li <- function(.) {
   (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c3)
 }
 
 ##2) RMM decay of MAOM pool
-f_32_rmm_none_ <- function(.) {
+f_c3c2_rmm_none_ <- function(.) {
   (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c2)
 }
 
@@ -114,7 +114,7 @@ f_32_rmm_none_ <- function(.) {
 ##c1_c2eff#####################
 
 #constant pom cue
-f_1cue_none_ <- function(.){
+f_c1c2eff_none_ <- function(.){
   .super$pars$cuec1
 }
 
@@ -125,7 +125,7 @@ f_1cue_none_ <- function(.){
 #so scaling original function to a reference clay content and using a lower
 #cue (from ICBM paper)
 ##changing int and slope to values from CENTURY (hassink equation barely changes transfer as a function of clay)
-f_13eff_lin_clay_century <- function(.){
+f_c1c3eff_lin_clay_century <- function(.){
   cue <-   .super$pars$cuec1
   int <-   .super$pars$e13int
   slope <- .super$pars$e13slope
@@ -135,17 +135,17 @@ f_13eff_lin_clay_century <- function(.){
 }
 
 #2) Hassink1; constant value
-f_13eff_const__ <- function(.){
+f_c1c3eff_const__ <- function(.){
   .super$pars$cuec1
 }
 
 #3) saturating function of the humification constant Hassink
-f_13eff_saturating_clay_hassink1 <- function(.){
+f_c1c3eff_saturating_clay_hassink1 <- function(.){
   .super$pars$cuec1 * (1 - (.super$state$c3/.super$state_pars$maommax))
 }
 
 ##c2_c1eff#####################
-f_21eff___hassink <- function(.){
+f_c2c1eff___hassink <- function(.){
   .super$pars$cuec1
 }
 
@@ -156,7 +156,7 @@ f_21eff___hassink <- function(.){
 #so scaling original function to a reference clay content and using a lower
 #cue (from ICBM paper)
 ##changing int and slope to values from CENTURY (hassink equation barely changes transfer as a function of clay)
-f_23eff_lin_clay_century <- function(.){
+f_c2c3eff_lin_clay_century <- function(.){
   cue <-   .super$pars$cuec2
   int <-   .super$pars$e13int     #using same value from 13eff
   slope <- .super$pars$e13slope   #using same value from 13eff
@@ -166,7 +166,7 @@ f_23eff_lin_clay_century <- function(.){
 }
   
 
-f_23eff___corpse <- function(.){
+f_c2c3eff___corpse <- function(.){
   .super$pars$t23eff
 }
 
@@ -174,7 +174,7 @@ f_23eff___corpse <- function(.){
 
 ##c3_c2eff#####################
 #1)constant maom CUE (same as POM cue for now)
-f_3cue_none_ <- function(.){
+f_c3c2eff_none_ <- function(.){
   .super$pars$cuec3
 }
 

@@ -51,22 +51,22 @@ som_thp_object$name <- 'som_thp'
 #Defaults set for CORPSE representation
 som_thp_object$fnames <- list(
   sys       = 'f_sys_thp',                     # three pool model with a POM, MB, and MAOM pool
-  c1_c2     = 'f_0',                           # transfer from pom(1) to mb(2)
-  c1_c3     = 'f_13_k_none_',                  # transfer from pom to maom(3)
-  c3_c1     = 'f_31_k_none_',                  # transfer from maom to pom
-  c3_c2     = 'f_0',                           # transfer from maom to mb
-  c2_c3     = 'f_0',                           # transfer from mb to maom
-  c2_c1     = 'f_0',                           # transfer from mb to pom
+  c1c2     = 'f_0',                           # transfer from pom(1) to mb(2)
+  c1c3     = 'f_c1c3_k_none_',                  # transfer from pom to maom(3)
+  c3c1     = 'f_c3c1_k_none_',                  # transfer from maom to pom
+  c3c2     = 'f_0',                           # transfer from maom to mb
+  c2c3     = 'f_0',                           # transfer from mb to maom
+  c2c1     = 'f_0',                           # transfer from mb to pom
   
   i1eff     = 'f_1',                           #fraction of inputs to pom
   i2eff     = 'f_0',                           #fraction of inputs to mb
   i3eff     = 'f_0',                           #fraction of inputs to maom
-  c1_c2eff     = 'f_1',                        #fraction of pom decay that enters mb
-  c1_c3eff     = 'f_13eff_lin_clay_century',   #fraction of pom decay that enters maom
-  c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
-  c3_c2eff     = 'f_1',                        #fraction of maom decay that enters mb     
-  c2_c3eff     = 'f_1',                        #fraction of mb decay that enters maom     
-  c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
+  c1c2eff     = 'f_1',                        #fraction of pom decay that enters mb
+  c1c3eff     = 'f_c1c3eff_lin_clay_century',   #fraction of pom decay that enters maom
+  c3c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
+  c3c2eff     = 'f_1',                        #fraction of maom decay that enters mb     
+  c2c3eff     = 'f_1',                        #fraction of mb decay that enters maom     
+  c2c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
   
   vmax1        =  'f_vmax1_constMM',
   km1          =  'f_km1_constMM',
@@ -236,13 +236,13 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.d
 
 som_thp_object$.test_change_func <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
                                              verbose=F,
-                                             som_thp.c1_c3eff='f_13eff_saturating_clay_hassink1',
+                                             som_thp.c1c3eff='f_c1c3eff_saturating_clay_hassink1',
                                              som_thp.cuec1 = 0.305
                                              ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
-  .$fnames$c1_c3eff   <- som_thp.c1_c3eff
+  .$fnames$c1c3eff   <- som_thp.c1c3eff
   .$pars$cuec1 <- som_thp.cuec1
   
   .$configure_test()  
@@ -282,18 +282,18 @@ som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.
 
 som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
-                                     som_thp.c1_c2     = 'f_12_mm_none_li',                           # transfer from pom(1) to mb(2)
-                                     som_thp.c1_c3     = 'f_0',                  # transfer from pom to maom(3)
-                                     som_thp.c3_c1     = 'f_0',                  # transfer from maom to pom
-                                     som_thp.c3_c2     = 'f_32_mm_none_li',                           # transfer from maom to mb
-                                     som_thp.c2_c3     = 'f_23_k_none_li',                           # transfer from mb to maom
-                                     som_thp.c2_c1     = 'f_0',                           # transfer from mb to pom
-                                     som_thp.c1_c2eff     = 'f_1cue_none_',                        #fraction of pom decay that enters mb
-                                     som_thp.c1_c3eff     = 'f_1',  #fraction of pom decay that enters maom
-                                     som_thp.c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
-                                     som_thp.c3_c2eff     = 'f_3cue_none_',                        #fraction of maom decay that enters mb     
-                                     som_thp.c2_c3eff     = 'f_23eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
-                                     som_thp.c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
+                                     som_thp.c1c2     = 'f_c1c2_mm_none_li',                           # transfer from pom(1) to mb(2)
+                                     som_thp.c1c3     = 'f_0',                  # transfer from pom to maom(3)
+                                     som_thp.c3c1     = 'f_0',                  # transfer from maom to pom
+                                     som_thp.c3c2     = 'f_c3c2_mm_none_li',                           # transfer from maom to mb
+                                     som_thp.c2c3     = 'f_c2c3_k_none_li',                           # transfer from mb to maom
+                                     som_thp.c2c1     = 'f_0',                           # transfer from mb to pom
+                                     som_thp.c1c2eff     = 'f_c1c2eff_none_',                        #fraction of pom decay that enters mb
+                                     som_thp.c1c3eff     = 'f_1',  #fraction of pom decay that enters maom
+                                     som_thp.c3c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
+                                     som_thp.c3c2eff     = 'f_c3c2eff_none_',                        #fraction of maom decay that enters mb     
+                                     som_thp.c2c3eff     = 'f_c2c3eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
+                                     som_thp.c2c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                      som_thp.cuec1          = 0.31,
                                      som_thp.vmax1_ref_MM       = 1.93,     #see "parameterization_notes.doc" 
                                      som_thp.km1_ref_MM        = 50,       #see "parameterization_notes.doc" 
@@ -306,18 +306,18 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
-  .$fnames$c1_c2   <- som_thp.c1_c2                          
-  .$fnames$c1_c3  <- som_thp.c1_c3                    
-  .$fnames$c3_c1 <- som_thp.c3_c1                    
-  .$fnames$c3_c2 <- som_thp.c3_c2                            
-  .$fnames$c2_c3 <- som_thp.c2_c3                            
-  .$fnames$c2_c1 <- som_thp.c2_c1           
-  .$fnames$c1_c2eff <- som_thp.c1_c2eff                    
-  .$fnames$c1_c3eff <- som_thp.c1_c3eff    
-  .$fnames$c3_c1eff <- som_thp.c3_c1eff                      
-  .$fnames$c3_c2eff <- som_thp.c3_c2eff                       
-  .$fnames$c2_c3eff <- som_thp.c2_c3eff                
-  .$fnames$c2_c1eff <- som_thp.c2_c1eff                       
+  .$fnames$c1c2   <- som_thp.c1c2                          
+  .$fnames$c1c3  <- som_thp.c1c3                    
+  .$fnames$c3c1 <- som_thp.c3c1                    
+  .$fnames$c3c2 <- som_thp.c3c2                            
+  .$fnames$c2c3 <- som_thp.c2c3                            
+  .$fnames$c2c1 <- som_thp.c2c1           
+  .$fnames$c1c2eff <- som_thp.c1c2eff                    
+  .$fnames$c1c3eff <- som_thp.c1c3eff    
+  .$fnames$c3c1eff <- som_thp.c3c1eff                      
+  .$fnames$c3c2eff <- som_thp.c3c2eff                       
+  .$fnames$c2c3eff <- som_thp.c2c3eff                
+  .$fnames$c2c1eff <- som_thp.c2c1eff                       
   
   .$pars$cuec1 <- som_thp.cuec1
   .$pars$vmax1_ref_MM <- som_thp.vmax1_ref_MM
@@ -348,18 +348,18 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
 
 som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                         verbose=F,
-                                        som_thp.c1_c2     = 'f_12_rmm_none_',                           # transfer from pom(1) to mb(2)
-                                        som_thp.c1_c3     = 'f_0',                  # transfer from pom to maom(3)
-                                        som_thp.c3_c1     = 'f_0',                  # transfer from maom to pom
-                                        som_thp.c3_c2     = 'f_32_rmm_none_',                           # transfer from maom to mb
-                                        som_thp.c2_c3     = 'f_23_k_none_li',                           # transfer from mb to maom
-                                        som_thp.c2_c1     = 'f_0',                           # transfer from mb to pom
-                                        som_thp.c1_c2eff     = 'f_1cue_none_',                        #fraction of pom decay that enters mb
-                                        som_thp.c1_c3eff     = 'f_1',  #fraction of pom decay that enters maom
-                                        som_thp.c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
-                                        som_thp.c3_c2eff     = 'f_3cue_none_',                        #fraction of maom decay that enters mb     
-                                        som_thp.c2_c3eff     = 'f_23eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
-                                        som_thp.c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
+                                        som_thp.c1c2     = 'f_c1c2_rmm_none_',                           # transfer from pom(1) to mb(2)
+                                        som_thp.c1c3     = 'f_0',                  # transfer from pom to maom(3)
+                                        som_thp.c3c1     = 'f_0',                  # transfer from maom to pom
+                                        som_thp.c3c2     = 'f_c3c2_rmm_none_',                           # transfer from maom to mb
+                                        som_thp.c2c3     = 'f_c2c3_k_none_li',                           # transfer from mb to maom
+                                        som_thp.c2c1     = 'f_0',                           # transfer from mb to pom
+                                        som_thp.c1c2eff     = 'f_c1c2eff_none_',                        #fraction of pom decay that enters mb
+                                        som_thp.c1c3eff     = 'f_1',  #fraction of pom decay that enters maom
+                                        som_thp.c3c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
+                                        som_thp.c3c2eff     = 'f_c3c2eff_none_',                        #fraction of maom decay that enters mb     
+                                        som_thp.c2c3eff     = 'f_c2c3eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
+                                        som_thp.c2c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                         
                                         som_thp.vmax1        =  'f_vmax1_const_rmm',
                                         som_thp.km1          =  'f_km1_const_rmm',
@@ -378,18 +378,18 @@ som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dumm
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
-  .$fnames$c1_c2   <- som_thp.c1_c2                          
-  .$fnames$c1_c3  <- som_thp.c1_c3                    
-  .$fnames$c3_c1 <- som_thp.c3_c1                    
-  .$fnames$c3_c2 <- som_thp.c3_c2                            
-  .$fnames$c2_c3 <- som_thp.c2_c3                            
-  .$fnames$c2_c1 <- som_thp.c2_c1           
-  .$fnames$c1_c2eff <- som_thp.c1_c2eff                    
-  .$fnames$c1_c3eff <- som_thp.c1_c3eff    
-  .$fnames$c3_c1eff <- som_thp.c3_c1eff                      
-  .$fnames$c3_c2eff <- som_thp.c3_c2eff                       
-  .$fnames$c2_c3eff <- som_thp.c2_c3eff                
-  .$fnames$c2_c1eff <- som_thp.c2_c1eff                       
+  .$fnames$c1c2   <- som_thp.c1c2                          
+  .$fnames$c1c3  <-  som_thp.c1c3                    
+  .$fnames$c3c1 <-   som_thp.c3c1                    
+  .$fnames$c3c2 <-   som_thp.c3c2                            
+  .$fnames$c2c3 <-   som_thp.c2c3                            
+  .$fnames$c2c1 <-   som_thp.c2c1           
+  .$fnames$c1c2eff <- som_thp.c1c2eff                    
+  .$fnames$c1c3eff <- som_thp.c1c3eff    
+  .$fnames$c3c1eff <- som_thp.c3c1eff                      
+  .$fnames$c3c2eff <- som_thp.c3c2eff                       
+  .$fnames$c2c3eff <- som_thp.c2c3eff                
+  .$fnames$c2c1eff <- som_thp.c2c1eff                       
  
   .$fnames$vmax1  <- som_thp.vmax1
   .$fnames$km1    <- som_thp.km1

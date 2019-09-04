@@ -2,21 +2,21 @@
   <fnames>
     <som_thp>
       <sys>NA</sys>
-      <c1_c2>NA</c1_c2>
-      <c1_c3>NA</c1_c3>
-      <c3_c1>NA</c3_c1>
-      <c3_c2>NA</c3_c2>
-      <c2_c3>NA</c2_c3>
-      <c2_c1>NA</c2_c1>
+      <c1c2>NA</c1c2>
+      <c1c3>NA</c1c3>
+      <c3c1>NA</c3c1>
+      <c3c2>NA</c3c2>
+      <c2c3>NA</c2c3>
+      <c2c1>NA</c2c1>
       <i1eff>NA</i1eff>
       <i2eff>NA</i2eff>
       <i3eff>NA</i3eff>
-      <c1_c2eff>NA</c1_c2eff>
-      <c1_c3eff>NA</c1_c3eff>
-      <c3_c1eff>NA</c3_c1eff>
-      <c3_c2eff>NA</c3_c2eff>
-      <c2_c3eff>NA</c2_c3eff>
-      <c2_c1eff>NA</c2_c1eff>
+      <c1c2eff>NA</c1c2eff>
+      <c1c3eff>NA</c1c3eff>
+      <c3c1eff>NA</c3c1eff>
+      <c3c2eff>NA</c3c2eff>
+      <c2c3eff>NA</c2c3eff>
+      <c2c1eff>NA</c2c1eff>
       <vmax1>NA</vmax1>
       <km1>NA</km1>
       <vmax3>NA</vmax3>

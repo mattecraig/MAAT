@@ -2,21 +2,21 @@
   <fnames>
     <som_thp>
       <sys>'c( 'f_sys_thp' )'</sys>
-      <c1_c2>'c(  )'</c1_c2>
-      <c1_c3>'c(  )'</c1_c3>
-      <c3_c1>'c(  )'</c3_c1>
-      <c3_c2>'c(  )'</c3_c2>
-      <c2_c3>'c(  )'</c2_c3>
-      <c2_c1>'c(  )'</c2_c1>
+      <c1c2>'c( 'f_c1c2_mm_none_li', 'f_c1c2_rmm_none_', 'f_c1c2eff_none_' )'</c1c2>
+      <c1c3>'c( 'f_c1c3_k_clay_corpse', 'f_c1c3_k_none_', 'f_c1c3_saturating_clay_hassink1', 'f_c1c3eff_const__', 'f_c1c3eff_lin_clay_century', 'f_c1c3eff_saturating_clay_hassink1' )'</c1c3>
+      <c3c1>'c( 'f_c3c1_k__corpse', 'f_c3c1_k_none_' )'</c3c1>
+      <c3c2>'c( 'f_c3c2_mm_none_li', 'f_c3c2_rmm_none_', 'f_c3c2eff_none_' )'</c3c2>
+      <c2c3>'c( 'f_c2c3_k_clay_corpse', 'f_c2c3_k_none_li', 'f_c2c3eff___corpse', 'f_c2c3eff_lin_clay_century' )'</c2c3>
+      <c2c1>'c( 'f_c2c1_k2__hassink1', 'f_c2c1eff___hassink' )'</c2c1>
       <i1eff>'c(  )'</i1eff>
       <i2eff>'c(  )'</i2eff>
       <i3eff>'c(  )'</i3eff>
-      <c1_c2eff>'c(  )'</c1_c2eff>
-      <c1_c3eff>'c(  )'</c1_c3eff>
-      <c3_c1eff>'c(  )'</c3_c1eff>
-      <c3_c2eff>'c(  )'</c3_c2eff>
-      <c2_c3eff>'c(  )'</c2_c3eff>
-      <c2_c1eff>'c(  )'</c2_c1eff>
+      <c1c2eff>'c( 'f_c1c2eff_none_' )'</c1c2eff>
+      <c1c3eff>'c( 'f_c1c3eff_const__', 'f_c1c3eff_lin_clay_century', 'f_c1c3eff_saturating_clay_hassink1' )'</c1c3eff>
+      <c3c1eff>'c(  )'</c3c1eff>
+      <c3c2eff>'c( 'f_c3c2eff_none_' )'</c3c2eff>
+      <c2c3eff>'c( 'f_c2c3eff___corpse', 'f_c2c3eff_lin_clay_century' )'</c2c3eff>
+      <c2c1eff>'c( 'f_c2c1eff___hassink' )'</c2c1eff>
       <vmax1>'c( 'f_vmax1_arrhenius', 'f_vmax1_const_rmm', 'f_vmax1_constMM' )'</vmax1>
       <km1>'c( 'f_km1_const_rmm', 'f_km1_constMM' )'</km1>
       <vmax3>'c( 'f_vmax3_const_rmm', 'f_vmax3_constMM' )'</vmax3>
