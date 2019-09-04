@@ -137,6 +137,14 @@ som_thp_object$pars   <- list(
   cuec3              = .31,       #general CUE from Li et al. 
   cuec2              = .6,        #Proportion of microbial turnover products that are retained rather than respired (Value of carbon eff of mic turnover from CORPSE)
   
+  #reverse michaelis menten
+  vmax1_ref_rmm       = .004582,     #see "parameterization_notes.doc" 
+  km1_ref_rmm        = 1.708,       #see "parameterization_notes.doc" 
+  vmax3_ref_rmm      = .0777,    #see "parameterization_notes.doc" 
+  km3_ref_rmm         = 250,      #see "parameterization_notes.doc" 
+  
+  
+  
   #old params to get rid of...
   ea1             = 47000,   #J/mol (average of three pools in CORPSE)
   vmax_maxref_1   = 1.37,    #d^-1 (values for mbc in CORPSE; 500/y *1/365d)
@@ -203,7 +211,7 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
 }
 
 #run with defaults over timestep
-som_thp_object$.test_timestep <- function(., som_thp.timestep=1:3650, som_thp.dummy = 1, 
+som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
                                             verbose=F, cverbose=F, diag=F) {
   
   if(verbose) str(.)
@@ -272,7 +280,7 @@ som_thp_object$.test_change_pars <- function(., som_thp.timestep=1:365, som_thp.
 }
 
 
-som_thp_object$.test_thp <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
                                              verbose=F,
                                      som_thp.c1_c2     = 'f_12_mm_none_li',                           # transfer from pom(1) to mb(2)
                                      som_thp.c1_c3     = 'f_0',                  # transfer from pom to maom(3)
@@ -288,7 +296,7 @@ som_thp_object$.test_thp <- function(., som_thp.timestep=1:365, som_thp.dummy = 
                                      som_thp.c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                      som_thp.cuec1          = 0.31,
                                      som_thp.vmax1_ref_MM       = 1.93,     #see "parameterization_notes.doc" 
-                                     som_thp.km1_ref_MM         = 50,       #see "parameterization_notes.doc" 
+                                     som_thp.km1_ref_MM        = 50,       #see "parameterization_notes.doc" 
                                      som_thp.vmax3_ref_MM       = .0777,    #see "parameterization_notes.doc" 
                                      som_thp.km3_ref_MM         = 250,
                                      som_thp.c2                 = 0.326,
@@ -336,6 +344,82 @@ som_thp_object$.test_thp <- function(., som_thp.timestep=1:365, som_thp.dummy = 
   plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
   
 }
+
+
+som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dummy = 1, 
+                                        verbose=F,
+                                        som_thp.c1_c2     = 'f_12_rmm_none_',                           # transfer from pom(1) to mb(2)
+                                        som_thp.c1_c3     = 'f_0',                  # transfer from pom to maom(3)
+                                        som_thp.c3_c1     = 'f_0',                  # transfer from maom to pom
+                                        som_thp.c3_c2     = 'f_32_rmm_none_',                           # transfer from maom to mb
+                                        som_thp.c2_c3     = 'f_23_k_none_li',                           # transfer from mb to maom
+                                        som_thp.c2_c1     = 'f_0',                           # transfer from mb to pom
+                                        som_thp.c1_c2eff     = 'f_1cue_none_',                        #fraction of pom decay that enters mb
+                                        som_thp.c1_c3eff     = 'f_1',  #fraction of pom decay that enters maom
+                                        som_thp.c3_c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
+                                        som_thp.c3_c2eff     = 'f_3cue_none_',                        #fraction of maom decay that enters mb     
+                                        som_thp.c2_c3eff     = 'f_23eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
+                                        som_thp.c2_c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
+                                        
+                                        som_thp.vmax1        =  'f_vmax1_const_rmm',
+                                        som_thp.km1          =  'f_km1_const_rmm',
+                                        som_thp.vmax3        =  'f_vmax3_const_rmm',
+                                        som_thp.km3          =  'f_km3_const_rmm',
+                                        
+                                        som_thp.cuec1          = 0.47,
+                                        som_thp.vmax1_ref_rmm       = .004582,     #see "parameterization_notes.doc" 
+                                        som_thp.km1_ref_rmm         = 1.708,       #see "parameterization_notes.doc" 
+                                        som_thp.vmax3_ref_rmm       = .0006,    #see "parameterization_notes.doc" 
+                                        som_thp.km3_ref_rmm         = 1.708,
+                                        som_thp.c2                 = 0.326,
+                                        som_thp.cuec2              = 0.47,
+                                        som_thp.cuec3              = 0.47
+) {
+  if(verbose) str(.)
+  .$build(switches=c(F,verbose,F))
+  
+  .$fnames$c1_c2   <- som_thp.c1_c2                          
+  .$fnames$c1_c3  <- som_thp.c1_c3                    
+  .$fnames$c3_c1 <- som_thp.c3_c1                    
+  .$fnames$c3_c2 <- som_thp.c3_c2                            
+  .$fnames$c2_c3 <- som_thp.c2_c3                            
+  .$fnames$c2_c1 <- som_thp.c2_c1           
+  .$fnames$c1_c2eff <- som_thp.c1_c2eff                    
+  .$fnames$c1_c3eff <- som_thp.c1_c3eff    
+  .$fnames$c3_c1eff <- som_thp.c3_c1eff                      
+  .$fnames$c3_c2eff <- som_thp.c3_c2eff                       
+  .$fnames$c2_c3eff <- som_thp.c2_c3eff                
+  .$fnames$c2_c1eff <- som_thp.c2_c1eff                       
+ 
+  .$fnames$vmax1  <- som_thp.vmax1
+  .$fnames$km1    <- som_thp.km1
+  .$fnames$vmax3  <- som_thp.vmax3
+  .$fnames$km3    <- som_thp.km3
+  
+  .$pars$cuec1 <- som_thp.cuec1
+  .$pars$vmax1_ref_rmm <- som_thp.vmax1_ref_rmm
+  .$pars$km1_ref_rmm <- som_thp.km1_ref_rmm
+  .$pars$vmax3_ref_rmm  <- som_thp.vmax3_ref_rmm
+  .$pars$km3_ref_rmm <- som_thp.km3_ref_rmm
+  .$pars$cuec2 <- som_thp.cuec2
+  .$pars$cuec3 <- som_thp.cuec3
+  
+  .$state$c2 <- som_thp.c2
+  
+  .$configure_test()  
+  
+  .$dataf     <- list()
+  .$dataf$met <-  expand.grid(mget(c('som_thp.timestep', 'som_thp.dummy')))   
+  .$dataf$out <- data.frame(do.call(rbind,lapply(1:length(.$dataf$met[,1]),.$run_met)))
+  
+  print(cbind(.$dataf$met,.$dataf$out))
+  par(mfrow = c(2,2))
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c1)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c2)
+  plot(.$dataf$met$som_thp.timestep, .$dataf$out$c3)
+  
+}
+
 
 
 ### END ###

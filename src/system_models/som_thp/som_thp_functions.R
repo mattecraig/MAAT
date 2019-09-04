@@ -20,6 +20,11 @@
 f_12_mm_none_li <- function(.) {
   (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c1)
 }
+
+##2) RMM decay of POM pool
+f_12_rmm_none_ <- function(.){
+  (.super$state_pars$vmax1*.super$state$c2*.super$state$c1)/(.super$state_pars$km1+.super$state$c2)
+} 
   
 #) Reverse michaelis-Menton; CORPSE, controlled by temp and moisture
 f_12_rmm_tm_corpse <- function(.) {   
@@ -95,6 +100,11 @@ f_31_k_none_ <- function(.){
 ##1) MM decay of MAOM pool
 f_32_mm_none_li <- function(.) {
   (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c3)
+}
+
+##2) RMM decay of MAOM pool
+f_32_rmm_none_ <- function(.) {
+  (.super$state_pars$vmax3*.super$state$c2*.super$state$c3)/(.super$state_pars$km3+.super$state$c2)
 }
 
 ##############################
@@ -188,6 +198,22 @@ f_km3_constMM <- function(.){
 
 f_maommax_hassink <- function(.) {
   21.1 + 0.0375*(.super$env$clay)*10
+}
+
+f_vmax1_const_rmm <- function(.){
+  .super$pars$vmax1_ref_rmm
+}
+
+f_km1_const_rmm <- function(.){
+  .super$pars$km1_ref_rmm
+}
+
+f_vmax3_const_rmm <- function(.){
+  .super$pars$vmax3_ref_rmm
+}
+
+f_km3_const_rmm <- function(.){
+  .super$pars$km3_ref_rmm
 }
 
 f_vmax1_arrhenius <- function(.) {
