@@ -39,6 +39,8 @@
       <k23>0.00672</k23>
       <cuec3>0.31</cuec3>
       <cuec2>0.6</cuec2>
+      <ndd>1.5</ndd>
+      <mbcmax>2</mbcmax>
       <vmax1_ref_rmm>0.004582</vmax1_ref_rmm>
       <km1_ref_rmm>1.708</km1_ref_rmm>
       <vmax3_ref_rmm>0.0777</vmax3_ref_rmm>

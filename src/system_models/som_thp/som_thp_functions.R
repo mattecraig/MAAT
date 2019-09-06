@@ -101,6 +101,11 @@ f_c2c3_k_none_li <- function(.){
   .super$state$c2*.super$pars$k23
 }
 
+#2) density-dependent turnover of the microbial biomass pool
+f_c2c3_ndd_none_georgiou <- function(.){
+  (.super$state$c2^.super$pars$ndd)*.super$pars$k23
+}
+
 f_c2c3_0 <- function(.) {
   0
 }
@@ -160,10 +165,16 @@ f_c3c2_1 <- function(.) {
 
 ##c1_c2eff#####################
 
-#constant pom cue
+#1) constant pom cue
 f_c1c2eff_none_ <- function(.){
   .super$pars$cuec1
 }
+
+#2) Density-dependent POM CUE
+f_c1c2eff_saturatingndd_ <- function(.){
+  .super$pars$cuec1*(1-(.super$state$c2/.super$pars$mbcmax))
+}
+
 
 f_c1c2eff_0 <- function(.){
   0
@@ -264,6 +275,11 @@ f_c3c1eff_1 <- function(.){
 #1)constant maom CUE (same as POM cue for now)
 f_c3c2eff_none_ <- function(.){
   .super$pars$cuec3
+}
+
+#2) Density-dependent MAOM CUE
+f_c3c2eff_saturatingndd_ <- function(.){
+  .super$pars$cuec3*(1-(.super$state$c2/.super$pars$mbcmax))
 }
 
 f_c3c2eff_0 <- function(.){

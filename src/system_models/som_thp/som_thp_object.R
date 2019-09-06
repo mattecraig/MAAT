@@ -136,6 +136,8 @@ som_thp_object$pars   <- list(
   k23                = .00672,    #turnover rate of microbial biomass from Li paper... might be too slow
   cuec3              = .31,       #general CUE from Li et al. 
   cuec2              = .6,        #Proportion of microbial turnover products that are retained rather than respired (Value of carbon eff of mic turnover from CORPSE)
+  ndd                = 1.5,       #exponent that modifies turnover rate based on mbc pool size (can range from 1 (no density dependence) to 2)
+  mbcmax             = 2,         #max size of mbc pool, totally arbitrary number for now
   
   #reverse michaelis menten
   vmax1_ref_rmm       = .004582,     #see "parameterization_notes.doc" 
@@ -212,11 +214,12 @@ som_thp_object$.test_change_env <- function(., verbose=F) {
 
 #run with defaults over timestep
 som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
-                                            verbose=F, cverbose=F, diag=F) {
+                                            verbose=F, cverbose=F, diag=F, som_thp.i = 0.00384) {
   
   if(verbose) str(.)
   .$build(switches=c(diag,verbose,cverbose) )
   
+  .$env$i <- som_thp.i
   
   # configure met data and run
   .$dataf     <- list()
@@ -237,13 +240,14 @@ som_thp_object$.test_timestep <- function(., som_thp.timestep=1:36500, som_thp.d
 som_thp_object$.test_change_func <- function(., som_thp.timestep=1:36500, som_thp.dummy = 1, 
                                              verbose=F,
                                              som_thp.c1c3eff='f_c1c3eff_saturating_clay_hassink1',
-                                             som_thp.cuec1 = 0.305
+                                             som_thp.cuec1 = 0.305, som_thp.i = 0.00384
                                              ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
   
   .$fnames$c1c3eff   <- som_thp.c1c3eff
   .$pars$cuec1 <- som_thp.cuec1
+  .$env$i <- som_thp.i
   
   .$configure_test()  
 
@@ -288,10 +292,10 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
                                      som_thp.c3c2     = 'f_c3c2_mm_none_li',                           # transfer from maom to mb
                                      som_thp.c2c3     = 'f_c2c3_k_none_li',                           # transfer from mb to maom
                                      som_thp.c2c1     = 'f_0',                           # transfer from mb to pom
-                                     som_thp.c1c2eff     = 'f_c1c2eff_none_',                        #fraction of pom decay that enters mb
-                                     som_thp.c1c3eff     = 'f_1',  #fraction of pom decay that enters maom
+                                     som_thp.c1c2eff     = 'f_c1c2eff_saturatingndd_',                        #fraction of pom decay that enters mb
+                                     som_thp.c1c3eff     = 'f_1',         #fraction of pom decay that enters maom
                                      som_thp.c3c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
-                                     som_thp.c3c2eff     = 'f_c3c2eff_none_',                        #fraction of maom decay that enters mb     
+                                     som_thp.c3c2eff     = 'f_c3c2eff_saturatingndd_',                        #fraction of maom decay that enters mb     
                                      som_thp.c2c3eff     = 'f_c2c3eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
                                      som_thp.c2c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                      som_thp.cuec1          = 0.31,
@@ -301,7 +305,11 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
                                      som_thp.km3_ref_MM         = 250,
                                      som_thp.c2                 = 0.326,
                                      som_thp.cuec2              = 0.6,
-                                     som_thp.cuec3              = 0.31
+                                     som_thp.cuec3              = 0.31, 
+                                     som_thp.i = 0.00384,
+                                     som_thp.c1 = 4.73,
+                                     som_thp.c3 = 12.88,
+                                     som_thp.ndd = 1.5
 ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
@@ -326,8 +334,13 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
   .$pars$km3_ref_MM <- som_thp.km3_ref_MM
   .$pars$cuec2 <- som_thp.cuec2
   .$pars$cuec3 <- som_thp.cuec3
+  .$pars$ndd <- som_thp.ndd
   
   .$state$c2 <- som_thp.c2
+  .$state$c1 <- som_thp.c1
+  .$state$c3 <- som_thp.c3
+  
+  .$env$i <- som_thp.i
   
   
   
@@ -354,10 +367,10 @@ som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dumm
                                         som_thp.c3c2     = 'f_c3c2_rmm_none_',                           # transfer from maom to mb
                                         som_thp.c2c3     = 'f_c2c3_k_none_li',                           # transfer from mb to maom
                                         som_thp.c2c1     = 'f_0',                           # transfer from mb to pom
-                                        som_thp.c1c2eff     = 'f_c1c2eff_none_',                        #fraction of pom decay that enters mb
+                                        som_thp.c1c2eff     = 'f_c1c2eff_saturatingndd_',                        #fraction of pom decay that enters mb
                                         som_thp.c1c3eff     = 'f_1',  #fraction of pom decay that enters maom
                                         som_thp.c3c1eff     = 'f_0',                        #fraction of maom decay that enters pom      
-                                        som_thp.c3c2eff     = 'f_c3c2eff_none_',                        #fraction of maom decay that enters mb     
+                                        som_thp.c3c2eff     = 'f_c3c2eff_saturatingndd_',                        #fraction of maom decay that enters mb     
                                         som_thp.c2c3eff     = 'f_c2c3eff_lin_clay_century',                        #TRYING THIS HERE ASSUMING CUE IS AT THE NEW HIGHER RATE; fraction of mb decay that enters maom     
                                         som_thp.c2c1eff     = 'f_1',                        #fraction of mb decay that enters pom    
                                         
@@ -373,7 +386,11 @@ som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dumm
                                         som_thp.km3_ref_rmm         = 1.708,
                                         som_thp.c2                 = 0.326,
                                         som_thp.cuec2              = 0.47,
-                                        som_thp.cuec3              = 0.47
+                                        som_thp.cuec3              = 0.47,
+                                        som_thp.i = 0.00384,
+                                        som_thp.c1 = 4.75,
+                                        som_thp.c3 = 13.16,
+                                        som_thp.ndd = 1.5
 ) {
   if(verbose) str(.)
   .$build(switches=c(F,verbose,F))
@@ -403,8 +420,13 @@ som_thp_object$.test_thp_rmm <- function(., som_thp.timestep=1:365, som_thp.dumm
   .$pars$km3_ref_rmm <- som_thp.km3_ref_rmm
   .$pars$cuec2 <- som_thp.cuec2
   .$pars$cuec3 <- som_thp.cuec3
+  .$pars$ndd <- som_thp.ndd
   
   .$state$c2 <- som_thp.c2
+  .$state$c1 <- som_thp.c1
+  .$state$c3 <- som_thp.c3
+  
+  .$env$i <- som_thp.i
   
   .$configure_test()  
   
