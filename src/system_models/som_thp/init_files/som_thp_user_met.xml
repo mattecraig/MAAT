@@ -1,6 +1,7 @@
 <met_data_translator>
   <env>
     <som_thp>
+      <time>'column name of variable in metdata file'</time>
       <i>'column name of variable in metdata file'</i>
       <clay>'column name of variable in metdata file'</clay>
       <temp>'column name of variable in metdata file'</temp>

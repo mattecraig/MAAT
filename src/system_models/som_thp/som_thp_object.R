@@ -79,6 +79,7 @@ som_thp_object$fnames <- list(
 # environment
 ####################################
 som_thp_object$env <- list(
+  time = numeric(1),
   i = .00384,         #input rate (mgC gsoil^-1; from Wang et al. 2013)
   clay = 20,       #clay content (percent)
   temp = 290,      #temp (K)
@@ -290,7 +291,7 @@ som_thp_object$.test_thp_mm <- function(., som_thp.timestep=1:365, som_thp.dummy
                                      som_thp.c1c3     = 'f_0',                  # transfer from pom to maom(3)
                                      som_thp.c3c1     = 'f_0',                  # transfer from maom to pom
                                      som_thp.c3c2     = 'f_c3c2_mm_none_li',                           # transfer from maom to mb
-                                     som_thp.c2c3     = 'f_c2c3_k_none_li',                           # transfer from mb to maom
+                                     som_thp.c2c3     = 'f_c2c3_ndd_none_georgiou',                           # transfer from mb to maom
                                      som_thp.c2c1     = 'f_0',                           # transfer from mb to pom
                                      som_thp.c1c2eff     = 'f_c1c2eff_saturatingndd_',                        #fraction of pom decay that enters mb
                                      som_thp.c1c3eff     = 'f_1',         #fraction of pom decay that enters maom

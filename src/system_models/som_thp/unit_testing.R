@@ -20,7 +20,7 @@ som_thp_object$.test_timestep(som_thp.timestep = 1:7300, som_thp.i = 0.0768)
 
 #changed this function to have density dependence of microbial turnover
 som_thp_object$.test_thp_mm(som_thp.timestep = 1:7300, som_thp.cuec1 = .47, som_thp.cuec2 = .47, som_thp.cuec3 = .47, som_thp.ndd = 1.5,
-                            som_thp.vmax1_ref_MM = .2346, som_thp.km1_ref_MM = 101, som_thp.i = 0.0768, som_thp.c1 = 4.12, som_thp.c2 = .3, som_thp.c3 = 12.6)
+                            som_thp.vmax1_ref_MM = .2346, som_thp.km1_ref_MM = 101, som_thp.i = 0.0384, som_thp.c1 = 4.12, som_thp.c2 = .42, som_thp.c3 = 8.2)
 
 som_thp_object$.test_thp_rmm(som_thp.timestep = 1:7300, som_thp.i = 0.0768, som_thp.c1 = 5.7, som_thp.c2 = .3, som_thp.c3 = 12.6)
 

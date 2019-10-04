@@ -49,6 +49,7 @@
   </pars>
   <env>
     <som_thp>
+      <time>0</time>
       <i>0.00384</i>
       <clay>20</clay>
       <temp>290</temp>
