@@ -5,7 +5,7 @@
 # AWalker November 2017; MCraig July 2019
 #
 ################################
-
+library(deSolve)
 library(proto)
 source('SoilTest2_functions.R')
 source('SoilTest2_system_functions.R')

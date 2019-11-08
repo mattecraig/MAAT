@@ -1,7 +1,7 @@
 <options>
   <fnames>
     <SoilTest2>
-      <sys>'c( 'f_sys_1' )'</sys>
+      <sys>'c( 'f_sys_1', 'f_sys_2' )'</sys>
       <c1_dec>'c(  )'</c1_dec>
       <c2_dec>'c(  )'</c2_dec>
       <cue>'c( 'f_cue_const' )'</cue>
